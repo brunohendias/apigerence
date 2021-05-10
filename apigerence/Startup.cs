@@ -24,14 +24,10 @@ namespace apigerence
         {
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "apigerence", Version = "v1" });
-            });
+            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "apigerence", Version = "v1" }));
 
             var serverVersion = new MySqlServerVersion(new Version(8, 0, 21));
-            var connection = Configuration["Connections:MySql"];
-            services.AddDbContext<MySqlContext>(options => options.UseMySql(connection, serverVersion));
+            services.AddDbContext<MySqlContext>(options => options.UseMySql(Configuration["Connections:MySql"], serverVersion));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,10 +46,7 @@ namespace apigerence
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
     }
 }
