@@ -64,6 +64,8 @@ namespace apigerence.Controllers
 
         private Candidato BuscaCandidato(long cod_can) => _context.Candidatos.Find(cod_can);
 
+        private SerieVinculo BuscaDadosSerie(long cod_serie_v) => _context.SerieVinculos.Find(cod_serie_v);
+
         private static string GeraRA(Aluno request) => 
             "" + request.cod_can + request.cod_atencao + request.cod_situacao + request.cod_serie_v + request.cod_atencao;
 
@@ -79,6 +81,13 @@ namespace apigerence.Controllers
                 if (candidato == null)
                 {
                     msg.fail = "Não conseguimos encontrar esse candidato.";
+                    return RespFail();
+                }
+
+                SerieVinculo vserie = BuscaDadosSerie(request.cod_serie_v);
+                if (candidato == null)
+                {
+                    msg.fail = "Não conseguimos encontrar os dados dessa série.";
                     return RespFail();
                 }
 

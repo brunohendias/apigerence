@@ -54,6 +54,22 @@ namespace apigerence.Controllers
             }
         }
 
+        private SerieVinculo Find(long id) => _context.SerieVinculos.Find(id);
+
+        private bool DadosInvalido(SerieVinculo request)
+        {
+            Serie serie = _context.Series.Find(request.cod_serie);
+            if (serie == null) return true;
+            Turno turno = _context.Turnos.Find(request.cod_turno);
+            if (turno == null) return true;
+            Turma turma = _context.Turmas.Find(request.cod_turma);
+            if (turma == null) return true;
+            Professor professor = _context.Professores.Find(request.cod_prof);
+            if (professor == null) return true;
+
+            return false;
+        }
+
         [HttpPost]
         public object Post(SerieVinculo request)
         {
@@ -61,6 +77,12 @@ namespace apigerence.Controllers
             {
                 msg.success = "Cadastramos as informações dessa série com successo.";
                 msg.fail = "Não conseguimos cadastrar as informações dessa série.";
+
+                if (DadosInvalido(request))
+                {
+                    msg.fail = "Existe dado invalido.";
+                    return RespFail();
+                }
 
                 SerieVinculo dados = new()
                 {
@@ -92,7 +114,7 @@ namespace apigerence.Controllers
                 msg.success = "Buscamos as informações dessa série com successo.";
                 msg.fail = "Não conseguimos encontrar as informações dessa série.";
 
-                SerieVinculo dado = _context.SerieVinculos.Find(id);
+                SerieVinculo dado = Find(id);
                 Dados = dado;
 
                 return MontaRetorno();
@@ -111,8 +133,14 @@ namespace apigerence.Controllers
                 msg.success = "Editamos as informações dessa série com successo.";
                 msg.fail = "Não conseguimos encontrar as informações dessa série.";
 
-                SerieVinculo dado = _context.SerieVinculos.Find(request.id);
+                SerieVinculo dado = Find(request.id);
                 if (dado == null) return RespFail();
+
+                if (DadosInvalido(request))
+                {
+                    msg.fail = "Existe dado invalido.";
+                    return RespFail();
+                }
 
                 SerieVinculo dados = new()
                 {
@@ -145,11 +173,14 @@ namespace apigerence.Controllers
                 msg.success = "Removemos as informações dessa série com successo.";
                 msg.fail = "Não conseguimos encontrar as informações dessa série.";
 
-                SerieVinculo dado = _context.SerieVinculos.Find(id);
+                SerieVinculo dado = Find(id);
                 if (dado == null) return RespFail();
 
-                msg.fail = "Não podemos deletar uma série com aluno.";
-                if (dado.qtd_alunos > 0) return RespFail();
+                if (dado.qtd_alunos > 0)
+                {
+                    msg.fail = "Não podemos deletar uma série com aluno.";
+                    return RespFail();
+                }
 
                 _context.SerieVinculos.Remove(dado);
                 _context.SaveChanges();
