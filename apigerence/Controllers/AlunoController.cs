@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace apigerence.Controllers
 {
@@ -14,6 +13,8 @@ namespace apigerence.Controllers
     public class AlunoController : ResponseService
     {
         private readonly MySqlContext _context;
+        private readonly int SituacaoInicialAluno = 3;
+
         public AlunoController(MySqlContext context)
         {
             _context = context;
@@ -55,6 +56,8 @@ namespace apigerence.Controllers
                     }
                 ).ToList();
 
+                if (query.Count > 0) Dados = query;
+
                 return MontaRetorno();
             }
             catch(Exception e)
@@ -63,14 +66,14 @@ namespace apigerence.Controllers
             }
         }
 
+        private List<Candidato> BuscaCandidato(long cod_can) => 
+            ( from candidato in _context.Candidatos 
+             where candidato.id == cod_can
+            select candidato ).ToList();
+
         private static string GeraRA(Aluno request)
         {
             return "" + request.cod_can + request.cod_atencao + request.cod_situacao + request.cod_serie_v + request.cod_atencao;
-        }
-
-        private static int SituacaoInicial()
-        {
-            return 3; // Cursando
         }
 
         [HttpPost]
@@ -91,7 +94,7 @@ namespace apigerence.Controllers
                     cod_can = request.cod_can,
                     cod_serie_v = request.cod_serie_v,
                     cod_atencao = request.cod_atencao,
-                    cod_situacao = SituacaoInicial()
+                    cod_situacao = SituacaoInicialAluno
                 };
 
                 _context.Alunos.Add(dados);
