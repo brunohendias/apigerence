@@ -13,12 +13,8 @@ namespace apigerence.Controllers
     public class SerieController : ResponseService
     {
         private readonly MySqlContext _context;
-        private readonly DbSet<Serie> model;
-        public SerieController(MySqlContext context)
-        {
-            _context = context;
-            model = _context.Series;
-        }
+
+        public SerieController(MySqlContext context) => _context = context;
 
         [HttpGet]
         public object Get()
@@ -28,7 +24,7 @@ namespace apigerence.Controllers
                 msg.success = "Buscamos as séries com successo.";
                 msg.fail = "Não encontramos as séries.";
 
-                var query = ( from serie in model select serie ).ToList();
+                var query = ( from serie in _context.Series select serie ).ToList();
 
                 Dados = query.Count == 0 ? null : query;
 
@@ -53,7 +49,7 @@ namespace apigerence.Controllers
                     serie = request.serie
                 };
 
-                model.Add(dados);
+                _context.Series.Add(dados);
                 _context.SaveChanges();
 
                 Dados = dados;
@@ -74,7 +70,7 @@ namespace apigerence.Controllers
                 msg.success = "Buscamos essa série com successo.";
                 msg.fail = "Não conseguimos encontrar essa série.";
 
-                Serie dado = model.Find(id);
+                Serie dado = _context.Series.Find(id);
                 Dados = dado;
 
                 return MontaRetorno();
@@ -93,7 +89,7 @@ namespace apigerence.Controllers
                 msg.success = "Editamos essa série com successo.";
                 msg.fail = "Não conseguimos encontrar essa série.";
 
-                Serie dado = model.Find(request.id);
+                Serie dado = _context.Series.Find(request.id);
                 if (dado == null) return RespFail();
 
                 Serie dados = new()
@@ -123,17 +119,17 @@ namespace apigerence.Controllers
                 msg.success = "Removemos essa série com successo.";
                 msg.fail = "Não encontramos essa série.";
 
-                Serie dado = model.Find(id);
+                Serie dado = _context.Series.Find(id);
                 if (dado == null) return RespFail();
 
-                int vinculo = model.Where(serie => serie.id == id).Count();
+                int vinculo = _context.SerieVinculos.Where(serie => serie.id == id).Count();
                 if (vinculo > 0)
                 {
                     msg.fail = "Não podemos remover uma série que esta sendo utilizada.";
                     return RespFail();
                 }
 
-                model.Remove(dado);
+                _context.Series.Remove(dado);
                 _context.SaveChanges();
 
                 Dados = dado;

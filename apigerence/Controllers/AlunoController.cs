@@ -14,11 +14,7 @@ namespace apigerence.Controllers
     {
         private readonly MySqlContext _context;
         private readonly int SituacaoInicialAluno = 3;
-
-        public AlunoController(MySqlContext context)
-        {
-            _context = context;
-        }
+        public AlunoController(MySqlContext context) => _context = context;
 
         [HttpGet]
         public object Get()
@@ -66,15 +62,10 @@ namespace apigerence.Controllers
             }
         }
 
-        private List<Candidato> BuscaCandidato(long cod_can) => 
-            ( from candidato in _context.Candidatos 
-             where candidato.id == cod_can
-            select candidato ).ToList();
+        private Candidato BuscaCandidato(long cod_can) => _context.Candidatos.Find(cod_can);
 
-        private static string GeraRA(Aluno request)
-        {
-            return "" + request.cod_can + request.cod_atencao + request.cod_situacao + request.cod_serie_v + request.cod_atencao;
-        }
+        private static string GeraRA(Aluno request) => 
+            "" + request.cod_can + request.cod_atencao + request.cod_situacao + request.cod_serie_v + request.cod_atencao;
 
         [HttpPost]
         public object Post(Aluno request)
@@ -83,6 +74,13 @@ namespace apigerence.Controllers
             {
                 msg.success = "Cadastramos esse aluno com sucesso.";
                 msg.fail = "Não conseguimos cadastrar esse aluno.";
+
+                Candidato candidato = BuscaCandidato(request.cod_can);
+                if (candidato == null)
+                {
+                    msg.fail = "Não conseguimos encontrar esse candidato.";
+                    return RespFail();
+                }
 
                 Aluno dados = new()
                 {

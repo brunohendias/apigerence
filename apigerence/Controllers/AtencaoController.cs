@@ -14,10 +14,7 @@ namespace apigerence.Controllers
     {
         private readonly MySqlContext _context;
 
-        public AtencaoController(MySqlContext context)
-        {
-            _context = context;
-        }
+        public AtencaoController(MySqlContext context) => _context = context;
 
         [HttpGet]
         public object Get()

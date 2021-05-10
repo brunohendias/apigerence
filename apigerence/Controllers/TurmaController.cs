@@ -13,10 +13,8 @@ namespace apigerence.Controllers
     public class TurmaController : ResponseService
     {
         private readonly MySqlContext _context;
-        public TurmaController (MySqlContext context)
-        {
-            _context = context;
-        }
+
+        public TurmaController(MySqlContext context) => _context = context;
 
         [HttpGet]
         public object Get()

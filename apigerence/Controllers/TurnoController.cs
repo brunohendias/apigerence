@@ -13,10 +13,8 @@ namespace apigerence.Controllers
     public class TurnoController : ResponseService
     {
         private readonly MySqlContext _context;
-        public TurnoController(MySqlContext context)
-        {
-            _context = context;
-        }
+
+        public TurnoController(MySqlContext context) => _context = context;
 
         [HttpGet]
         public object Get()

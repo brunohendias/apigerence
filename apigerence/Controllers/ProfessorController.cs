@@ -14,10 +14,7 @@ namespace apigerence.Controllers
     {
         private readonly MySqlContext _context;
 
-        public ProfessorController(MySqlContext context)
-        {
-            _context = context;
-        }
+        public ProfessorController(MySqlContext context) => _context = context;
 
         [HttpGet]
         public object Get()

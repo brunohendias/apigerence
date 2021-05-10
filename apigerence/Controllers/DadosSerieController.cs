@@ -13,10 +13,8 @@ namespace apigerence.Controllers
     public class DadosSerieController : ResponseService
     {
         private readonly MySqlContext _context;
-        public DadosSerieController(MySqlContext context)
-        {
-            _context = context;
-        }
+
+        public DadosSerieController(MySqlContext context) => _context = context;
 
         [HttpGet]
         public object Get()

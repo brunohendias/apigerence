@@ -2,7 +2,6 @@
 using apigerence.Models.Context;
 using apigerence.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,14 +13,8 @@ namespace apigerence.Controllers
     public class CandidatoController : ResponseService
     {
         private readonly MySqlContext _context;
-        private readonly DbSet<Candidato> model;
-        private readonly Msg _msg;
 
-        public CandidatoController(MySqlContext context) 
-        {
-            _context = context;
-            model = _context.Candidatos;
-        }
+        public CandidatoController(MySqlContext context) => _context = context;
 
         [HttpGet]
         public object Get()
@@ -32,7 +25,7 @@ namespace apigerence.Controllers
                 msg.fail = "Não encontramos os candidatos.";
 
                 var query = (
-                    from candidato in model
+                    from candidato in _context.Candidatos
                     join atencao in _context.Atencoes
                         on candidato.cod_atencao equals atencao.id
                     join vserie in _context.SerieVinculos
@@ -65,6 +58,10 @@ namespace apigerence.Controllers
             }
         }
 
+        private Inscricao BuscaInscricao(long cod_insc) => _context.Inscricoes.Find(cod_insc);
+
+        private SerieVinculo BuscaDadosSerie(long cod_serie_v) => _context.SerieVinculos.Find(cod_serie_v);
+
         [HttpPost]
         public object Post(Candidato request)
         {
@@ -73,21 +70,21 @@ namespace apigerence.Controllers
                 msg.success = "Cadastramos esse candidato com successo.";
                 msg.fail = "Não conseguimos cadastrar esse candidato.";
 
-                SerieVinculo vserie = _context.SerieVinculos.Find(request.cod_serie_v);
+                SerieVinculo vserie = BuscaDadosSerie(request.cod_serie_v);
                 if (vserie == null)
                 {
                     msg.fail = "Não conseguimos encontrar essa série.";
                     return RespFail();
                 }
                 
-                Inscricao insc = _context.Inscricoes.Find(request.cod_insc);
+                Inscricao insc = BuscaInscricao(request.cod_insc);
                 if (insc == null)
                 {
                     msg.fail = "Não conseguimos encontrar a inscrição desse candidato.";
                     return RespFail();
                 }
 
-                model.Add(request);
+                _context.Candidatos.Add(request);
                 _context.SaveChanges();
                 Dados = request;
 
