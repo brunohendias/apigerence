@@ -11,7 +11,7 @@ namespace apigerence.Models
         public string nom_aluno { get; set; }
         public string email { get; set; }
         public string telefone { get; set; }
-        public char cpf { get; set; }
+        public string cpf { get; set; }
         public string num_matricula { get; set; }
         public long cod_can { get; set; }
         public long cod_serie_v { get; set; }

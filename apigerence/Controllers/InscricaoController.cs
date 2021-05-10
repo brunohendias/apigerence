@@ -28,6 +28,8 @@ namespace apigerence.Controllers
 
                 var query = (
                     from inscricao in _context.Inscricoes 
+                    join endereco in _context.EnderecoInscs
+                        on inscricao.id equals endereco.cod_insc
                     join serie in _context.Series
                         on inscricao.cod_serie equals serie.id
                     join atencao in _context.Atencoes
@@ -36,6 +38,7 @@ namespace apigerence.Controllers
                         on inscricao.cod_turno equals turno.id
                     select new {
                         inscricao,
+                        endereco,
                         serie.serie,
                         atencao.atencao,
                         turno.turno
@@ -62,6 +65,8 @@ namespace apigerence.Controllers
 
                 var query = (
                     from inscricao in _context.Inscricoes
+                    join endereco in _context.EnderecoInscs
+                        on inscricao.id equals endereco.cod_insc
                     join serie in _context.Series
                         on inscricao.cod_serie equals serie.id
                     join atencao in _context.Atencoes
@@ -72,6 +77,7 @@ namespace apigerence.Controllers
                     select new
                     {
                         inscricao,
+                        endereco,
                         serie.serie,
                         atencao.atencao,
                         turno.turno

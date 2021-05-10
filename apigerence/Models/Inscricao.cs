@@ -12,7 +12,7 @@ namespace apigerence.Models
         public DateTime data_nasci { get; set; }
         public string email { get; set; }
         public string telefone { get; set; }
-        public char cpf { get; set; }
+        public string cpf { get; set; }
         public string rg { get; set; }
         public string nom_mae { get; set; }
         public string nom_pai { get; set; }
