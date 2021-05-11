@@ -19,5 +19,14 @@ namespace apigerence.Models
         public long cod_serie { get; set; }
         public long cod_atencao { get; set; }
         public long cod_turno { get; set; }
+
+        [ForeignKey("cod_serie")]
+        public Serie Serie { get; set; }
+
+        [ForeignKey("cod_atencao")]
+        public Atencao Atencao { get; set; }
+
+        [ForeignKey("cod_turno")]
+        public Turno Turno { get; set; }
     }
 }

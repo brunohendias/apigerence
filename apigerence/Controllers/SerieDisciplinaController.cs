@@ -1,8 +1,8 @@
-﻿using apigerence.Models.Context;
+﻿using apigerence.Models;
+using apigerence.Models.Context;
 using apigerence.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace apigerence.Controllers
@@ -23,16 +23,8 @@ namespace apigerence.Controllers
                 msg.fail = "Não conseguimos encontrar as disciplinas das séries.";
 
                 var query = (
-                        from disciplinaS in _context.SerieDisciplinas
-                        join serie in _context.Series
-                            on disciplinaS.cod_serie equals serie.id
-                        join disciplina in _context.Disciplinas
-                            on disciplinaS.cod_disciplina equals disciplina.id
-                        select new {
-                            disciplinaS,
-                            serie.serie,
-                            disciplina
-                        }
+                        from v in _context.SerieDisciplinas
+                        select new { v.id, v.Serie, v.Disciplina }
                     ).ToList();
 
                 if (query.Count > 0) Dados = query;
@@ -45,8 +37,8 @@ namespace apigerence.Controllers
             }
         }
 
-        [HttpGet("disciplinas/{id}")]
-        public object Disciplinas(long id)
+        [HttpGet("find")]
+        public object Find([FromQuery] SerieDisciplina request)
         {
             try
             {
@@ -54,37 +46,10 @@ namespace apigerence.Controllers
                 msg.fail = "Não conseguimos encontrar as disciplinas dessa série.";
 
                 var query = (
-                        from disciplinaS in _context.SerieDisciplinas
-                        join disciplina in _context.Disciplinas
-                            on disciplinaS.cod_disciplina equals disciplina.id
-                        where disciplinaS.cod_serie == id
-                        select disciplina
-                    ).ToList();
-
-                if (query.Count > 0) Dados = query;
-
-                return MontaRetorno();
-            }
-            catch (Exception e)
-            {
-                return RespErrorLog(e);
-            }
-        }
-
-        [HttpGet("series/{id}")]
-        public object Series(long id)
-        {
-            try
-            {
-                msg.success = "Buscamos as séries que possuem essa disciplina com sucesso.";
-                msg.fail = "Não conseguimos encontrar as séries que possuem essa disciplina.";
-
-                var query = (
-                        from disciplinaS in _context.SerieDisciplinas
-                        join serie in _context.Series
-                            on disciplinaS.cod_serie equals serie.id
-                        where disciplinaS.cod_disciplina == id
-                        select serie
+                        from v in _context.SerieDisciplinas
+                        where v.cod_serie == request.cod_serie 
+                            || v.cod_disciplina == request.cod_disciplina
+                        select new { v.id, v.Serie, v.Disciplina }
                     ).ToList();
 
                 if (query.Count > 0) Dados = query;

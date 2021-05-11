@@ -3,9 +3,7 @@ using apigerence.Models.Context;
 using apigerence.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace apigerence.Controllers
 {
@@ -26,23 +24,12 @@ namespace apigerence.Controllers
 
                 var query = (
                         from daluno in _context.AlunoDisciplinas
-                        join aluno in _context.Alunos
-                            on daluno.cod_aluno equals aluno.id
-                        join bimestre in _context.Bimestres
-                            on daluno.cod_bimestre equals bimestre.id
-                        join sdiciplina in _context.SerieDisciplinas
-                            on daluno.cod_serie_disc equals sdiciplina.id
-                        join serie in _context.Series
-                            on sdiciplina.cod_serie equals serie.id
-                        join disciplina in _context.Disciplinas
-                            on sdiciplina.cod_disciplina equals disciplina.id
                         select new
                         {
-                            daluno,
-                            aluno.nom_aluno,
-                            bimestre.bimestre,
-                            serie.serie,
-                            disciplina.disciplina
+                            daluno.Alunos,
+                            daluno.SerieDisciplinas.Serie.serie,
+                            daluno.SerieDisciplinas.Disciplina.disciplina,
+                            daluno.Bimestres.bimestre
                         }
                     ).ToList();
 
@@ -66,25 +53,17 @@ namespace apigerence.Controllers
 
                 var query = (
                         from daluno in _context.AlunoDisciplinas
-                        join aluno in _context.Alunos
-                            on daluno.cod_aluno equals aluno.id
-                        join bimestre in _context.Bimestres
-                            on daluno.cod_bimestre equals bimestre.id
-                        join sdiciplina in _context.SerieDisciplinas
-                            on daluno.cod_serie_disc equals sdiciplina.id
-                        join serie in _context.Series
-                            on sdiciplina.cod_serie equals serie.id
-                        join disciplina in _context.Disciplinas
-                            on sdiciplina.cod_disciplina equals disciplina.id
-                        where daluno.cod_aluno == request.cod_aluno 
+                        where daluno.cod_aluno == request.cod_aluno
                             || daluno.cod_bimestre == request.cod_bimestre
+                            || daluno.SerieDisciplinas.cod_serie == request.SerieDisciplinas.cod_serie
+                            || daluno.SerieDisciplinas.cod_disciplina == request.SerieDisciplinas.cod_disciplina
                         select new
                         {
                             daluno,
-                            aluno.nom_aluno,
-                            bimestre.bimestre,
-                            serie.serie,
-                            disciplina.disciplina
+                            daluno.Alunos.nom_aluno,
+                            daluno.SerieDisciplinas.Serie.serie,
+                            daluno.SerieDisciplinas.Disciplina.disciplina,
+                            daluno.Bimestres.bimestre
                         }
                     ).ToList();
 

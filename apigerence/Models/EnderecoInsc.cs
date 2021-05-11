@@ -14,5 +14,8 @@ namespace apigerence.Models
         public string rua { get; set; }
         public int numero { get; set; }
         public string cep { get; set; }
+
+        [ForeignKey("cod_insc")]
+        public Inscricao Inscricao { get; set; }
     }
 }

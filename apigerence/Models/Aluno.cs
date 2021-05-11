@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace apigerence.Models
 {
@@ -16,6 +17,15 @@ namespace apigerence.Models
         public long cod_serie_v { get; set; }
         public long cod_atencao { get; set; }
         public long cod_situacao { get; set; }
+
+        [ForeignKey("cod_can")]
+        public Candidato Candidato { get; set; }
+        [ForeignKey("cod_serie_v")]
+        public SerieVinculo InfosSerie { get; set; }
+        [ForeignKey("cod_atencao")]
+        public Atencao Atencao { get; set; }
+        [ForeignKey("cod_situacao")]
+        public SituacaoAluno Situacao { get; set; }
 
     }
 }

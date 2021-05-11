@@ -26,29 +26,15 @@ namespace apigerence.Controllers
 
                 var query = (
                     from aluno in _context.Alunos
-                    join atencao in _context.Atencoes
-                        on aluno.cod_atencao equals atencao.id
-                    join situacao in _context.SituacaoAlunos
-                        on aluno.cod_situacao equals situacao.id
-                    join dados in _context.SerieVinculos
-                        on aluno.cod_serie_v equals dados.id
-                    join serie in _context.Series
-                        on dados.cod_serie equals serie.id
-                    join turno in _context.Turnos
-                        on dados.cod_turno equals turno.id
-                    join turma in _context.Turmas
-                        on dados.cod_turma equals turma.id
-                    join professor in _context.Professores
-                        on dados.cod_prof equals professor.id
                     select new
                     {
                         aluno,
-                        serie.serie,
-                        turno.turno,
-                        turma.turma,
-                        professor.nom_prof,
-                        atencao.atencao,
-                        situacao.situacao
+                        aluno.Atencao.atencao,
+                        aluno.Situacao.situacao,
+                        aluno.InfosSerie.Serie.serie,
+                        aluno.InfosSerie.Turno.turno,
+                        aluno.InfosSerie.Turma.turma,
+                        aluno.InfosSerie.Professor.nom_prof
                     }
                 ).ToList();
 

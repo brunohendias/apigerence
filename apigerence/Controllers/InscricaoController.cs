@@ -2,7 +2,6 @@
 using apigerence.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace apigerence.Controllers
@@ -24,21 +23,12 @@ namespace apigerence.Controllers
                 msg.fail = "Não encontramos as inscrições.";
 
                 var query = (
-                    from inscricao in _context.Inscricoes 
-                    join endereco in _context.EnderecoInscs
-                        on inscricao.id equals endereco.cod_insc
-                    join serie in _context.Series
-                        on inscricao.cod_serie equals serie.id
-                    join atencao in _context.Atencoes
-                        on inscricao.cod_atencao equals atencao.id
-                    join turno in _context.Turnos
-                        on inscricao.cod_turno equals turno.id
+                    from inscricao in _context.Inscricoes
                     select new {
                         inscricao,
-                        endereco,
-                        serie.serie,
-                        atencao.atencao,
-                        turno.turno
+                        inscricao.Serie.serie,
+                        inscricao.Atencao.atencao,
+                        inscricao.Turno.turno
                     }
                 ).ToList();
 
@@ -62,22 +52,12 @@ namespace apigerence.Controllers
 
                 var query = (
                     from inscricao in _context.Inscricoes
-                    join endereco in _context.EnderecoInscs
-                        on inscricao.id equals endereco.cod_insc
-                    join serie in _context.Series
-                        on inscricao.cod_serie equals serie.id
-                    join atencao in _context.Atencoes
-                        on inscricao.cod_atencao equals atencao.id
-                    join turno in _context.Turnos
-                        on inscricao.cod_turno equals turno.id
                     where inscricao.id == id
-                    select new
-                    {
+                    select new {
                         inscricao,
-                        endereco,
-                        serie.serie,
-                        atencao.atencao,
-                        turno.turno
+                        inscricao.Serie.serie,
+                        inscricao.Atencao.atencao,
+                        inscricao.Turno.turno
                     }
                 ).ToList();
 

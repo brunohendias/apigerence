@@ -15,5 +15,17 @@ namespace apigerence.Models
         public long cod_turma { get; set; }
         public long cod_prof { get; set; }
 
+        [ForeignKey("cod_serie")]
+        public Serie Serie { get; set; }
+
+        [ForeignKey("cod_turno")]
+        public Turno Turno { get; set; }
+
+        [ForeignKey("cod_turma")]
+        public Turma Turma { get; set; }
+
+        [ForeignKey("cod_prof")]
+        public Professor Professor { get; set; }
+
     }
 }

@@ -3,7 +3,6 @@ using apigerence.Models.Context;
 using apigerence.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace apigerence.Controllers
@@ -26,25 +25,13 @@ namespace apigerence.Controllers
 
                 var query = (
                     from candidato in _context.Candidatos
-                    join atencao in _context.Atencoes
-                        on candidato.cod_atencao equals atencao.id
-                    join vserie in _context.SerieVinculos
-                        on candidato.cod_serie_v equals vserie.id
-                    join serie in _context.Series
-                        on vserie.cod_serie equals serie.id
-                    join turno in _context.Turnos
-                        on vserie.cod_turno equals turno.id
-                    join turma in _context.Turmas
-                        on vserie.cod_turma equals turma.id
-                    join professor in _context.Professores
-                        on vserie.cod_prof equals professor.id
-                  select new {
+                    select new {
                         candidato,
-                        atencao,
-                        serie,
-                        turno,
-                        turma,
-                        professor
+                        candidato.Atencao.atencao,
+                        candidato.InfosSerie.Serie.serie,
+                        candidato.InfosSerie.Turno.turno,
+                        candidato.InfosSerie.Turma.turma,
+                        candidato.InfosSerie.Professor.nom_prof
                     }
                 ).ToList();
 

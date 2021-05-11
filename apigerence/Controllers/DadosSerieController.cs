@@ -25,22 +25,14 @@ namespace apigerence.Controllers
                 msg.fail = "Não encontramos as informações das séries.";
 
                 var query = (
-                    from dados in _context.SerieVinculos 
-                    join serie in _context.Series
-                        on dados.cod_serie equals serie.id
-                    join turno in _context.Turnos
-                        on dados.cod_turno equals turno.id
-                    join turma in _context.Turmas
-                        on dados.cod_turma equals turma.id
-                    join professor in _context.Professores
-                        on dados.cod_prof equals professor.id
+                    from dados in _context.SerieVinculos
                     select new
                     {
                         dados,
-                        serie.serie,
-                        turno.turno,
-                        turma.turma,
-                        professor.nom_prof
+                        dados.Serie.serie,
+                        dados.Turno.turno,
+                        dados.Turma.turma,
+                        dados.Professor.nom_prof
                     }
                 ).ToList();
 
@@ -114,8 +106,20 @@ namespace apigerence.Controllers
                 msg.success = "Buscamos as informações dessa série com successo.";
                 msg.fail = "Não conseguimos encontrar as informações dessa série.";
 
-                SerieVinculo dado = Find(id);
-                Dados = dado;
+                var query = (
+                    from dados in _context.SerieVinculos
+                    where dados.id == id
+                    select new
+                    {
+                        dados,
+                        dados.Serie.serie,
+                        dados.Turno.turno,
+                        dados.Turma.turma,
+                        dados.Professor.nom_prof
+                    }
+                ).ToList();
+
+                if (query.Count > 0) Dados = query;
 
                 return MontaRetorno();
             }
