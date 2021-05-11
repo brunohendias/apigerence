@@ -27,7 +27,7 @@ namespace apigerence.Controllers
                         select disciplina
                     ).ToList();
 
-                Dados = query;
+                if (query.Count > 0) Dados = query;
 
                 return MontaRetorno();
             }
