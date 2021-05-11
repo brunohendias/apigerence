@@ -71,7 +71,7 @@ namespace apigerence.Controllers
         }
 
         [HttpPost]
-        public object Post(SerieVinculo request)
+        public object Post([FromBody] SerieVinculo request)
         {
             try
             {
@@ -126,7 +126,7 @@ namespace apigerence.Controllers
         }
 
         [HttpPut]
-        public object Put(SerieVinculo request)
+        public object Put([FromBody] SerieVinculo request)
         {
             try
             {

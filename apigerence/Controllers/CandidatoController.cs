@@ -63,7 +63,7 @@ namespace apigerence.Controllers
         private SerieVinculo BuscaDadosSerie(long cod_serie_v) => _context.SerieVinculos.Find(cod_serie_v);
 
         [HttpPost]
-        public object Post(Candidato request)
+        public object Post([FromBody] Candidato request)
         {
             try
             {

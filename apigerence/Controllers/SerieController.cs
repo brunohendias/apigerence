@@ -37,7 +37,7 @@ namespace apigerence.Controllers
         }
 
         [HttpPost]
-        public object Post(Serie request)
+        public object Post([FromBody] Serie request)
         {
             try
             {
@@ -82,7 +82,7 @@ namespace apigerence.Controllers
         }
 
         [HttpPut]
-        public object Put(Serie request)
+        public object Put([FromBody] Serie request)
         {
             try
             {

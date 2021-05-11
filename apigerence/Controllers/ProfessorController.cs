@@ -37,7 +37,7 @@ namespace apigerence.Controllers
         }
 
         [HttpPost]
-        public object Post(Professor request)
+        public object Post([FromBody] Professor request)
         {
             try
             {

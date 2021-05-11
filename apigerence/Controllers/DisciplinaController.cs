@@ -38,7 +38,7 @@ namespace apigerence.Controllers
         }
 
         [HttpPost]
-        public object Post(Disciplina request)
+        public object Post([FromBody] Disciplina request)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace apigerence.Controllers
             ( from serie in _context.SerieDisciplinas where serie.cod_disciplina == id select serie ).FirstOrDefault();
 
         [HttpPut]
-        public object Put(Disciplina request)
+        public object Put([FromBody] Disciplina request)
         {
             try
             {

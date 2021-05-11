@@ -37,7 +37,7 @@ namespace apigerence.Controllers
         }
 
         [HttpPost]
-        public object Post(SituacaoAluno request)
+        public object Post([FromBody] SituacaoAluno request)
         {
             try
             {

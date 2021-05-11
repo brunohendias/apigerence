@@ -70,7 +70,7 @@ namespace apigerence.Controllers
             "" + request.cod_can + request.cod_atencao + request.cod_situacao + request.cod_serie_v + request.cod_atencao;
 
         [HttpPost]
-        public object Post(Aluno request)
+        public object Post([FromBody] Aluno request)
         {
             try
             {

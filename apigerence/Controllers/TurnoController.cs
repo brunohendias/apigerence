@@ -37,7 +37,7 @@ namespace apigerence.Controllers
         }
 
         [HttpPost]
-        public object Post(Turno request)
+        public object Post([FromBody] Turno request)
         {
             try
             {

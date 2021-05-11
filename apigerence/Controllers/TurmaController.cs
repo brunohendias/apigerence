@@ -37,7 +37,7 @@ namespace apigerence.Controllers
         }
 
         [HttpPost]
-        public object Post(Turma request)
+        public object Post([FromBody] Turma request)
         {
             try
             {

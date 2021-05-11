@@ -46,6 +46,8 @@ namespace apigerence.Controllers
                         }
                     ).ToList();
 
+                if (query.Count > 0) Dados = query;
+
                 return MontaRetorno();
             }
             catch (Exception e)
@@ -55,7 +57,7 @@ namespace apigerence.Controllers
         }
 
         [HttpGet("notas")]
-        public object Notas([FromBody] AlunoDisciplina request)
+        public object Notas([FromQuery] AlunoDisciplina request)
         {
             try
             {
@@ -76,8 +78,6 @@ namespace apigerence.Controllers
                             on sdiciplina.cod_disciplina equals disciplina.id
                         where daluno.cod_aluno == request.cod_aluno 
                             || daluno.cod_bimestre == request.cod_bimestre
-                            || sdiciplina.cod_serie == request.cod_serie
-                            || sdiciplina.cod_disciplina == request.cod_disciplina
                         select new
                         {
                             daluno,
