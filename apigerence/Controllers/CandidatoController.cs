@@ -75,6 +75,12 @@ namespace apigerence.Controllers
                 {
                     msg.fail = "Não conseguimos encontrar essa série.";
                     return RespFail();
+                } 
+                else if (vserie.qtd_alunos == vserie.limite_alunos)
+                {
+                    msg.success = "Cadastramos esse candidato com successo. " +
+                        "Porém passou do limite de alunos nessa série, " +
+                        "lembresse que é permitido ter apenas " + vserie.limite_alunos + " Alunos";
                 }
                 
                 Inscricao insc = BuscaInscricao(request.cod_insc);
