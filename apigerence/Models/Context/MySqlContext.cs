@@ -5,13 +5,13 @@ namespace apigerence.Models.Context
     public class MySqlContext : DbContext
     {
         public MySqlContext(DbContextOptions<MySqlContext> options) : base(options) { }
-
         public DbSet<Inscricao> Inscricoes { get; set; }
         public DbSet<EnderecoInsc> EnderecoInscs { get; set; }
         public DbSet<Candidato> Candidatos { get; set; }
         public DbSet<Aluno> Alunos { get; set; }
         public DbSet<Atencao> Atencoes { get; set; }
         public DbSet<Serie> Series { get; set; }
+        public DbSet<Bimestre> Bimestres { get; set; }
         public DbSet<Turno> Turnos { get; set; }
         public DbSet<Turma> Turmas { get; set; }
         public DbSet<Professor> Professores { get; set; }

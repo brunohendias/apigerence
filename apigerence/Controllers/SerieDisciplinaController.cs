@@ -28,10 +28,9 @@ namespace apigerence.Controllers
                             on disciplinaS.cod_serie equals serie.id
                         join disciplina in _context.Disciplinas
                             on disciplinaS.cod_disciplina equals disciplina.id
-                        orderby disciplinaS.cod_serie
                         select new {
                             disciplinaS,
-                            serie.id,
+                            serie.serie,
                             disciplina
                         }
                     ).ToList();

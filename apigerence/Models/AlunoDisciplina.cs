@@ -11,5 +11,6 @@ namespace apigerence.Models
         public decimal nota { get; set; }
         public long cod_aluno { get; set; }
         public long cod_serie_disc { get; set; }
+        public long cod_bimestre { get; set; }
     }
 }
