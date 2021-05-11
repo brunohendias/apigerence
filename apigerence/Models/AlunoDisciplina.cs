@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace apigerence.Models
 {
@@ -11,6 +10,8 @@ namespace apigerence.Models
         public decimal nota { get; set; }
         public long cod_aluno { get; set; }
         public long cod_serie_disc { get; set; }
+        public long cod_serie { get; set; }
+        public long cod_disciplina { get; set; }
         public long cod_bimestre { get; set; }
     }
 }
