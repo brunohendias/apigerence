@@ -11,9 +11,8 @@ namespace apigerence.Controllers
     [Route("api/v1/[controller]")]
     public class AlunoController : ResponseService
     {
-        private readonly MySqlContext _context;
         private readonly int SituacaoInicialAluno = 3;
-        public AlunoController(MySqlContext context) => _context = context;
+        public AlunoController(MySqlContext context) : base(context) { }
 
         [HttpGet]
         public object Get()

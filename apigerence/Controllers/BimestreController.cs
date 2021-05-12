@@ -10,8 +10,7 @@ namespace apigerence.Controllers
     [Route("api/v1/[controller]")]
     public class BimestreController : ResponseService
     {
-        private readonly MySqlContext _context;
-        public BimestreController(MySqlContext context) => _context = context;
+        public BimestreController(MySqlContext context) : base(context) { }
 
         [HttpGet]
         public object Get()

@@ -12,9 +12,7 @@ namespace apigerence.Controllers
     [Route("api/v1/[controller]")]
     public class TurmaController : ResponseService
     {
-        private readonly MySqlContext _context;
-
-        public TurmaController(MySqlContext context) => _context = context;
+        public TurmaController(MySqlContext context) : base(context) { }
 
         [HttpGet]
         public object Get()

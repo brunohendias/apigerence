@@ -11,8 +11,7 @@ namespace apigerence.Controllers
     [Route("api/v1/[controller]")]
     public class DisciplinaController : ResponseService
     {
-        private readonly MySqlContext _context;
-        public DisciplinaController(MySqlContext context) => _context = context;
+        public DisciplinaController(MySqlContext context) : base(context) { }
 
         [HttpGet]
         public object Get()

@@ -11,9 +11,7 @@ namespace apigerence.Controllers
     [Route("api/v1/[controller]")]
     public class SerieController : ResponseService
     {
-        private readonly MySqlContext _context;
-
-        public SerieController(MySqlContext context) => _context = context;
+        public SerieController(MySqlContext context) : base(context) { }
 
         [HttpGet]
         public object Get()

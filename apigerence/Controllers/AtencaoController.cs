@@ -12,9 +12,7 @@ namespace apigerence.Controllers
     [Route("api/v1/[controller]")]
     public class AtencaoController : ResponseService
     {
-        private readonly MySqlContext _context;
-
-        public AtencaoController(MySqlContext context) => _context = context;
+        public AtencaoController(MySqlContext context) : base(context) { }
 
         [HttpGet]
         public object Get()

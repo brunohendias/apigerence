@@ -11,9 +11,7 @@ namespace apigerence.Controllers
     [Route("api/v1/[controller]")]
     public class CandidatoController : ResponseService
     {
-        private readonly MySqlContext _context;
-
-        public CandidatoController(MySqlContext context) => _context = context;
+        public CandidatoController(MySqlContext context) : base(context) { }
 
         [HttpGet]
         public object Get()

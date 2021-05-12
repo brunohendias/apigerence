@@ -1,4 +1,5 @@
-﻿using System;
+﻿using apigerence.Models.Context;
+using System;
 
 namespace apigerence.Services
 {
@@ -26,16 +27,18 @@ namespace apigerence.Services
     public class ResponseService
     {
         protected object Dados = null;
+        protected MySqlContext _context;
 
         protected Msg msg;
         private readonly Codes _codes;
         private readonly Status _status;
 
-        public ResponseService()
+        public ResponseService(MySqlContext context)
         {
             _codes = new Codes();
             _status = new Status();
             msg = new Msg();
+            _context = context;
         }
 
         protected object MontaRetorno() =>

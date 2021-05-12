@@ -10,9 +10,7 @@ namespace apigerence.Controllers
     [Route("api/v1/[controller]")]
     public class InscricaoController : ResponseService
     {
-        private readonly MySqlContext _context;
-
-        public InscricaoController(MySqlContext context) => _context = context;
+        public InscricaoController(MySqlContext context) : base(context) { }
 
         [HttpGet]
         public object Get()

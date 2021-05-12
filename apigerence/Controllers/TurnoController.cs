@@ -12,9 +12,7 @@ namespace apigerence.Controllers
     [Route("api/v1/[controller]")]
     public class TurnoController : ResponseService
     {
-        private readonly MySqlContext _context;
-
-        public TurnoController(MySqlContext context) => _context = context;
+        public TurnoController(MySqlContext context) : base(context) { }
 
         [HttpGet]
         public object Get()
