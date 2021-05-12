@@ -27,7 +27,7 @@ namespace apigerence.Services
     public class ResponseService
     {
         protected object Dados = null;
-        protected MySqlContext _context;
+        protected readonly MySqlContext _context;
 
         protected Msg msg;
         private readonly Codes _codes;
