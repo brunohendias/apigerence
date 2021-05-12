@@ -23,7 +23,7 @@ namespace apigerence.Models
         [MaxLength(11)]
         public string cpf { get; set; }
         [Required]
-        [MaxLength(20)]
+        [MaxLength(9)]
         public string rg { get; set; }
         [Required]
         [MaxLength(90)]
