@@ -11,15 +11,20 @@ namespace apigerence.Models
         [Required]
         public long cod_insc { get; set; }
         [Required]
+        [MaxLength(2)]
         public string estado { get; set; }
         [Required]
+        [MaxLength(90)]
         public string cidade { get; set; }
         [Required]
+        [MaxLength(90)]
         public string bairro { get; set; }
         [Required]
+        [MaxLength(90)]
         public string rua { get; set; }
         [Required]
         public int numero { get; set; }
+        [MaxLength(8)]
         public string cep { get; set; }
 
         [ForeignKey("cod_insc")]

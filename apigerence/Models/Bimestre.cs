@@ -8,6 +8,7 @@ namespace apigerence.Models
     {
         public long id { get; set; }
         [Required]
+        [MaxLength(45)]
         public string bimestre { get; set; }
     }
 }

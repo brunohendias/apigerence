@@ -82,10 +82,7 @@ namespace apigerence.Controllers
 
                 Aluno dados = new()
                 {
-                    nom_aluno = request.nom_aluno,
-                    email = request.email,
-                    telefone = request.telefone,
-                    cpf = request.cpf,
+                    nome = request.nome,
                     num_matricula = GeraRA(request),
                     cod_can = cod_can,
                     cod_serie_v = cod_serie_v,

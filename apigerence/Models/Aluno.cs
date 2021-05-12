@@ -9,13 +9,10 @@ namespace apigerence.Models
         [Key]
         public long cod_aluno { get; set; }
         [Required]
-        public string nom_aluno { get; set; }
-        public string email { get; set; }
+        [MaxLength(50)]
+        public string nome { get; set; }
         [Required]
-        public string telefone { get; set; }
-        [Required]
-        public string cpf { get; set; }
-        [Required]
+        [MaxLength(10)]
         public string num_matricula { get; set; }
         [Required]
         public long cod_can { get; set; }

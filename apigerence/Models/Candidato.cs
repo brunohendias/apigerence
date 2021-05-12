@@ -10,12 +10,8 @@ namespace apigerence.Models
         [Key]
         public long cod_can { get; set; }
         [Required]
-        public string nom_can { get; set; }
-        public string email { get; set; }
-        [Required]
-        public string telefone { get; set; }
-        [Required]
-        public string cpf { get; set; }
+        [MaxLength(50)]
+        public string nome { get; set; }
         [Required]
         public long cod_serie_v { get; set; }
         [Required]

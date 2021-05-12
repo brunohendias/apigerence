@@ -9,6 +9,7 @@ namespace apigerence.Models
         [Key]
         public long cod_atencao { get; set; }
         [Required]
+        [MaxLength(50)]
         public string atencao { get; set; }
     }
 }

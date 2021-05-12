@@ -9,6 +9,7 @@ namespace apigerence.Models
         [Key]
         public long cod_prof { get; set; }
         [Required]
+        [MaxLength(90)]
         public string nom_prof { get; set; }
     }
 }
