@@ -65,7 +65,7 @@ namespace apigerence.Controllers
                         select new
                         {
                             daluno,
-                            daluno.Alunos.nom_aluno,
+                            daluno.Alunos.nome,
                             daluno.SerieDisciplinas.Serie.serie,
                             daluno.SerieDisciplinas.Disciplina.disciplina,
                             daluno.Bimestres.bimestre
