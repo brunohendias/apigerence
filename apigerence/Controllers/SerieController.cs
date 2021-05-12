@@ -88,12 +88,12 @@ namespace apigerence.Controllers
                 msg.success = "Editamos essa série com successo.";
                 msg.fail = "Não conseguimos encontrar essa série.";
 
-                Serie dado = _context.Series.Find(request.id);
+                Serie dado = _context.Series.Find(request.cod_serie);
                 if (dado == null) return RespFail();
 
                 Serie dados = new()
                 {
-                    id = request.id,
+                    cod_serie = request.cod_serie,
                     serie = request.serie
                 };
 
@@ -121,7 +121,7 @@ namespace apigerence.Controllers
                 Serie dado = _context.Series.Find(id);
                 if (dado == null) return RespFail();
 
-                int vinculo = _context.SerieVinculos.Where(serie => serie.id == id).Count();
+                int vinculo = _context.SerieVinculos.Where(serie => serie.cod_serie == id).Count();
                 if (vinculo > 0)
                 {
                     msg.fail = "Não podemos remover uma série que esta sendo utilizada.";

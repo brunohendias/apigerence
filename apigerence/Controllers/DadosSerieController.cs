@@ -3,7 +3,6 @@ using apigerence.Models.Context;
 using apigerence.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace apigerence.Controllers
@@ -108,7 +107,7 @@ namespace apigerence.Controllers
 
                 var query = (
                     from dados in _context.SerieVinculos
-                    where dados.id == id
+                    where dados.cod_serie_v == id
                     select new
                     {
                         dados,
@@ -137,7 +136,7 @@ namespace apigerence.Controllers
                 msg.success = "Editamos as informações dessa série com successo.";
                 msg.fail = "Não conseguimos encontrar as informações dessa série.";
 
-                SerieVinculo dado = Find(request.id);
+                SerieVinculo dado = Find(request.cod_serie_v);
                 if (dado == null) return RespFail();
 
                 if (DadosInvalido(request))
@@ -148,7 +147,7 @@ namespace apigerence.Controllers
 
                 SerieVinculo dados = new()
                 {
-                    id = request.id,
+                    cod_serie_v = request.cod_serie_v,
                     cod_serie = request.cod_serie,
                     cod_turno = request.cod_turno,
                     cod_turma = request.cod_turma,

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace apigerence.Models
@@ -6,8 +6,8 @@ namespace apigerence.Models
     [Table("serie_v")]
     public class SerieVinculo
     {
-        [Column("cod_serie_v")]
-        public long id { get; set; }
+        [Key]
+        public long cod_serie_v { get; set; }
         public int qtd_alunos { get; set; }
         public int limite_alunos { get; set; }
         public long cod_serie { get; set; }

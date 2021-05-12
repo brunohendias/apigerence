@@ -1,12 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace apigerence.Models
 {
     [Table("aluno_disciplina")]
     public class AlunoDisciplina
     {
-        [Column("cod_aluno_disc")]
-        public long id { get; set; }
+        [Key]
+        public long cod_aluno_disc { get; set; }
         
         public float nota { get; set; }
         

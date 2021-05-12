@@ -1,12 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace apigerence.Models
 {
     [Table("candidato")]
     public class Candidato
     {
-        [Column("cod_can")]
-        public long id { get; set; }
+
+        [Key]
+        public long cod_can { get; set; }
         public string nom_can { get; set; }
         public string email { get; set; }
         public string telefone { get; set; }

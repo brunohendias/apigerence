@@ -1,12 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace apigerence.Models
 {
     [Table("endereco_insc")]
     public class EnderecoInsc
     {
-        [Column("cod_endereco_insc")]
-        public long id { get; set; }
+        [Key]
+        public long cod_endereco_insc { get; set; }
         public long cod_insc { get; set; }
         public string estado { get; set; }
         public string cidade { get; set; }

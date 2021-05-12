@@ -76,7 +76,7 @@ namespace apigerence.Controllers
                 msg.success = "Editamos essa disciplina com sucesso.";
                 msg.fail = "Não conseguimos editar essa disciplina.";
 
-                Disciplina dado = Find(request.id);
+                Disciplina dado = Find(request.cod_disciplina);
                 if (dado == null)
                 {
                     msg.fail = "Não conseguimos encontrar essa disciplina.";
@@ -85,7 +85,7 @@ namespace apigerence.Controllers
 
                 Disciplina dados = new()
                 {
-                    id = request.id,
+                    cod_disciplina = request.cod_disciplina,
                     disciplina = request.disciplina
                 };
 

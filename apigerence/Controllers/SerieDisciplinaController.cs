@@ -24,7 +24,7 @@ namespace apigerence.Controllers
 
                 var query = (
                         from v in _context.SerieDisciplinas
-                        select new { v.id, v.Serie, v.Disciplina }
+                        select new { v.cod_serie_disc, v.Serie, v.Disciplina }
                     ).ToList();
 
                 if (query.Count > 0) Dados = query;
@@ -49,7 +49,7 @@ namespace apigerence.Controllers
                         from v in _context.SerieDisciplinas
                         where v.cod_serie == request.cod_serie 
                             || v.cod_disciplina == request.cod_disciplina
-                        select new { v.id, v.Serie, v.Disciplina }
+                        select new { v.cod_serie_disc, v.Serie, v.Disciplina }
                     ).ToList();
 
                 if (query.Count > 0) Dados = query;

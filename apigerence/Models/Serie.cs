@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace apigerence.Models
@@ -6,8 +6,8 @@ namespace apigerence.Models
     [Table("serie")]
     public class Serie
     {
-        [Column("cod_serie")]
-        public long id { get; set; }
+        [Key]
+        public long cod_serie { get; set; }
         public string serie { get; set; }
     }
 }

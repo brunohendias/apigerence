@@ -6,8 +6,8 @@ namespace apigerence.Models
     [Table("aluno")]
     public class Aluno
     {
-        [Column("cod_aluno")]
-        public long id { get; set; }
+        [Key]
+        public long cod_aluno { get; set; }
         public string nom_aluno { get; set; }
         public string email { get; set; }
         public string telefone { get; set; }

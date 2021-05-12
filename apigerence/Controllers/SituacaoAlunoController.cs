@@ -68,7 +68,7 @@ namespace apigerence.Controllers
                 SituacaoAluno request = _context.SituacaoAlunos.Find(id);
                 if (request == null) return RespFail();
 
-                int vinculo = _context.Alunos.Where(aluno => aluno.id == id).Count();
+                int vinculo = _context.Alunos.Where(aluno => aluno.cod_situacao == id).Count();
                 if (vinculo > 0)
                 {
                     msg.fail = "Não podemos remover essa situação que esta sendo utilizada.";

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace apigerence.Models
@@ -6,8 +6,8 @@ namespace apigerence.Models
     [Table("professor")]
     public class Professor
     {
-        [Column("cod_prof")]
-        public long id { get; set; }
+        [Key]
+        public long cod_prof { get; set; }
         public string nom_prof { get; set; }
     }
 }

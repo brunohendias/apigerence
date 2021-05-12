@@ -52,7 +52,7 @@ namespace apigerence.Controllers
 
                 var query = (
                     from inscricao in _context.Inscricoes
-                    where inscricao.id == id
+                    where inscricao.cod_insc == id
                     select new {
                         inscricao,
                         inscricao.Serie.serie,
