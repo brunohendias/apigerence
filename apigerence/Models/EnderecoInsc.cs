@@ -8,11 +8,17 @@ namespace apigerence.Models
     {
         [Key]
         public long cod_endereco_insc { get; set; }
+        [Required]
         public long cod_insc { get; set; }
+        [Required]
         public string estado { get; set; }
+        [Required]
         public string cidade { get; set; }
+        [Required]
         public string bairro { get; set; }
+        [Required]
         public string rua { get; set; }
+        [Required]
         public int numero { get; set; }
         public string cep { get; set; }
 

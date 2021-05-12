@@ -8,6 +8,7 @@ namespace apigerence.Models
     {
         [Key]
         public long cod_disciplina { get; set; }
+        [Required]
         public string disciplina { get; set; }
     }
 }

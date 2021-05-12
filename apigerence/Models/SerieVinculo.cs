@@ -8,10 +8,15 @@ namespace apigerence.Models
     {
         [Key]
         public long cod_serie_v { get; set; }
+        [Required]
         public int qtd_alunos { get; set; }
+        [Required]
         public int limite_alunos { get; set; }
+        [Required]
         public long cod_serie { get; set; }
+        [Required]
         public long cod_turno { get; set; }
+        [Required]
         public long cod_turma { get; set; }
         public long cod_prof { get; set; }
 

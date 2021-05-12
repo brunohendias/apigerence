@@ -8,6 +8,7 @@ namespace apigerence.Models
     {
         [Key]
         public long cod_turma { get; set; }
+        [Required]
         public string turma { get; set; }
     }
 }

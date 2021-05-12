@@ -8,13 +8,13 @@ namespace apigerence.Models
     {
         [Key]
         public long cod_aluno_disc { get; set; }
-        
+        [Required]
         public float nota { get; set; }
-        
+        [Required]
         public long cod_aluno { get; set; }
-        
+        [Required]
         public long cod_serie_disc { get; set; }
-        
+        [Required]
         public long cod_bimestre { get; set; }
         
         [ForeignKey("cod_aluno")] 

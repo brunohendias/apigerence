@@ -8,6 +8,7 @@ namespace apigerence.Models
     {
         [Key]
         public long cod_serie { get; set; }
+        [Required]
         public string serie { get; set; }
     }
 }

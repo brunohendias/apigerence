@@ -8,6 +8,7 @@ namespace apigerence.Models
     {
         [Key]
         public long cod_prof { get; set; }
+        [Required]
         public string nom_prof { get; set; }
     }
 }

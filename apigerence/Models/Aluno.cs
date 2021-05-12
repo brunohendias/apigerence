@@ -8,14 +8,22 @@ namespace apigerence.Models
     {
         [Key]
         public long cod_aluno { get; set; }
+        [Required]
         public string nom_aluno { get; set; }
         public string email { get; set; }
+        [Required]
         public string telefone { get; set; }
+        [Required]
         public string cpf { get; set; }
+        [Required]
         public string num_matricula { get; set; }
+        [Required]
         public long cod_can { get; set; }
+        [Required]
         public long cod_serie_v { get; set; }
+        [Required]
         public long cod_atencao { get; set; }
+        [Required]
         public long cod_situacao { get; set; }
 
         [ForeignKey("cod_can")]

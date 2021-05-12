@@ -8,6 +8,7 @@ namespace apigerence.Models
     {
         [Key]
         public long cod_situacao { get; set; }
+        [Required]
         public string situacao { get; set; }
     }
 }

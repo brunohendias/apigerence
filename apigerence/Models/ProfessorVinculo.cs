@@ -8,7 +8,9 @@ namespace apigerence.Models
     {
         [Key]
         public long cod_prof_v { get; set; }
+        [Required]
         public long cod_prof { get; set; }
+        [Required]
         public long cod_atencao { get; set; }
 
         [ForeignKey("cod_prof")]
