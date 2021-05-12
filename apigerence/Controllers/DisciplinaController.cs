@@ -45,15 +45,10 @@ namespace apigerence.Controllers
                 msg.success = "Cadastramos essa disciplina com sucesso.";
                 msg.fail = "Não conseguimos cadastrar essa disciplina.";
 
-                Disciplina dados = new()
-                {
-                    disciplina = request.disciplina
-                };
-
-                _context.Disciplinas.Add(dados);
+                _context.Disciplinas.Add(request);
                 _context.SaveChanges();
 
-                Dados = dados;
+                Dados = request;
 
                 return MontaRetorno();
             }
@@ -83,16 +78,10 @@ namespace apigerence.Controllers
                     return RespFail();
                 }
 
-                Disciplina dados = new()
-                {
-                    cod_disciplina = request.cod_disciplina,
-                    disciplina = request.disciplina
-                };
-
-                _context.Entry(dado).CurrentValues.SetValues(dados);
+                _context.Entry(dado).CurrentValues.SetValues(request);
                 _context.SaveChanges();
 
-                Dados = dados;
+                Dados = request;
 
                 return MontaRetorno();
             }
@@ -124,7 +113,8 @@ namespace apigerence.Controllers
                     _context.SaveChanges();
 
                     Dados = dado;
-                } else
+                } 
+                else
                 {
                     msg.fail = "Não podemos remover uma disciplina que está cadastrada em uma série.";
                     return RespFail();

@@ -43,15 +43,10 @@ namespace apigerence.Controllers
                 msg.success = "Cadastramos essa série com successo.";
                 msg.fail = "Não conseguimos cadastrar essa série.";
 
-                Serie dados = new()
-                {
-                    serie = request.serie
-                };
-
-                _context.Series.Add(dados);
+                _context.Series.Add(request);
                 _context.SaveChanges();
 
-                Dados = dados;
+                Dados = request;
 
                 return MontaRetorno();
             }
@@ -91,16 +86,10 @@ namespace apigerence.Controllers
                 Serie dado = _context.Series.Find(request.cod_serie);
                 if (dado == null) return RespFail();
 
-                Serie dados = new()
-                {
-                    cod_serie = request.cod_serie,
-                    serie = request.serie
-                };
-
-                _context.Entry(dado).CurrentValues.SetValues(dados);
+                _context.Entry(dado).CurrentValues.SetValues(request);
                 _context.SaveChanges();
 
-                Dados = dados;
+                Dados = request;
 
                 return MontaRetorno();
             }

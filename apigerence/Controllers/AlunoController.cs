@@ -3,7 +3,6 @@ using apigerence.Models.Context;
 using apigerence.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace apigerence.Controllers
@@ -63,14 +62,18 @@ namespace apigerence.Controllers
                 msg.success = "Cadastramos esse aluno com sucesso.";
                 msg.fail = "Não conseguimos cadastrar esse aluno.";
 
-                Candidato candidato = BuscaCandidato(request.cod_can);
+                long cod_can = request.cod_can;
+                long cod_serie_v = request.cod_serie_v;
+                long cod_atencao = request.cod_atencao;
+
+                Candidato candidato = BuscaCandidato(cod_can);
                 if (candidato == null)
                 {
                     msg.fail = "Não conseguimos encontrar esse candidato.";
                     return RespFail();
                 }
 
-                SerieVinculo vserie = BuscaDadosSerie(request.cod_serie_v);
+                SerieVinculo vserie = BuscaDadosSerie(cod_serie_v);
                 if (candidato == null)
                 {
                     msg.fail = "Não conseguimos encontrar os dados dessa série.";
@@ -84,9 +87,9 @@ namespace apigerence.Controllers
                     telefone = request.telefone,
                     cpf = request.cpf,
                     num_matricula = GeraRA(request),
-                    cod_can = request.cod_can,
-                    cod_serie_v = request.cod_serie_v,
-                    cod_atencao = request.cod_atencao,
+                    cod_can = cod_can,
+                    cod_serie_v = cod_serie_v,
+                    cod_atencao = cod_atencao,
                     cod_situacao = SituacaoInicialAluno
                 };
 
