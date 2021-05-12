@@ -21,10 +21,10 @@ namespace apigerence.Models
         public string telefone { get; set; }
         [Required]
         [MaxLength(11)]
-        public char cpf { get; set; }
+        public string cpf { get; set; }
         [Required]
         [MaxLength(9)]
-        public char rg { get; set; }
+        public string rg { get; set; }
         [Required]
         [MaxLength(90)]
         public string nom_mae { get; set; }
