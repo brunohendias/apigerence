@@ -9,6 +9,7 @@ namespace apigerence.Models
         [Key]
         public long cod_endereco_insc { get; set; }
         [Required]
+        [ForeignKey("Inscricao")]
         public long cod_insc { get; set; }
         [Required]
         [MaxLength(2)]
@@ -27,7 +28,6 @@ namespace apigerence.Models
         [MaxLength(8)]
         public string cep { get; set; }
 
-        [ForeignKey("cod_insc")]
         public Inscricao Inscricao { get; set; }
     }
 }

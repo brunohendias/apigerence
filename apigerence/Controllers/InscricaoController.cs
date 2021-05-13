@@ -68,5 +68,33 @@ namespace apigerence.Controllers
                 return RespErrorLog(e);
             }
         }
+
+        [HttpGet("endereco/{id}")]
+        public object Endereco(long id)
+        {
+            try
+            {
+                msg.success = "Buscamos o endereço dessa inscrição com sucesso.";
+                msg.fail = "Não encontramos o endereço dessa inscrição.";
+
+                var query = (
+                    from endereco in _context.EnderecoInscs
+                    where endereco.cod_insc == id
+                    select new
+                    {
+                        endereco,
+                        endereco.Inscricao
+                    }
+                ).ToList();
+
+                if (query.Count > 0) Dados = query;
+
+                return MontaRetorno();
+            }
+            catch (Exception e)
+            {
+                return RespErrorLog(e);
+            }
+        }
     }
 }

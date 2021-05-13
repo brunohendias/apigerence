@@ -9,14 +9,13 @@ namespace apigerence.Models
         [Key]
         public long cod_serie_disc { get; set; }
         [Required]
+        [ForeignKey("Serie")]
         public long cod_serie { get; set; }
         [Required]
+        [ForeignKey("Disciplina")]
         public long cod_disciplina { get; set; }
 
-        [ForeignKey("cod_serie")]
         public Serie Serie { get; set; }
-
-        [ForeignKey("cod_disciplina")]
         public Disciplina Disciplina { get; set; }
     }
 }

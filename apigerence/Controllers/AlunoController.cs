@@ -3,6 +3,7 @@ using apigerence.Models.Context;
 using apigerence.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace apigerence.Controllers
@@ -29,10 +30,10 @@ namespace apigerence.Controllers
                         aluno,
                         aluno.Atencao.atencao,
                         aluno.Situacao.situacao,
-                        aluno.InfosSerie.Serie.serie,
-                        aluno.InfosSerie.Turno.turno,
-                        aluno.InfosSerie.Turma.turma,
-                        aluno.InfosSerie.Professor.nom_prof
+                        aluno.SerieVinculo.Serie.serie,
+                        aluno.SerieVinculo.Turno.turno,
+                        aluno.SerieVinculo.Turma.turma,
+                        aluno.SerieVinculo.Professor.nom_prof
                     }
                 ).ToList();
 

@@ -13,23 +13,20 @@ namespace apigerence.Models
         [Required]
         public int limite_alunos { get; set; }
         [Required]
+        [ForeignKey("Serie")]
         public long cod_serie { get; set; }
         [Required]
+        [ForeignKey("Turno")]
         public long cod_turno { get; set; }
         [Required]
+        [ForeignKey("Turma")]
         public long cod_turma { get; set; }
+        [ForeignKey("Professor")]
         public long cod_prof { get; set; }
 
-        [ForeignKey("cod_serie")]
         public virtual Serie Serie { get; set; }
-
-        [ForeignKey("cod_turno")]
         public virtual Turno Turno { get; set; }
-
-        [ForeignKey("cod_turma")]
         public virtual Turma Turma { get; set; }
-
-        [ForeignKey("cod_prof")]
         public virtual Professor Professor { get; set; }
 
     }

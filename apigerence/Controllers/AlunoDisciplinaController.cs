@@ -25,10 +25,10 @@ namespace apigerence.Controllers
                         from daluno in _context.AlunoDisciplinas
                         select new
                         {
-                            daluno.Alunos,
-                            daluno.SerieDisciplinas.Serie.serie,
-                            daluno.SerieDisciplinas.Disciplina.disciplina,
-                            daluno.Bimestres.bimestre
+                            daluno.Aluno,
+                            daluno.SerieDisciplina.Serie.serie,
+                            daluno.SerieDisciplina.Disciplina.disciplina,
+                            daluno.Bimestre.bimestre
                         }
                     ).ToList();
 
@@ -52,22 +52,22 @@ namespace apigerence.Controllers
 
                 long cod_aluno = request.cod_aluno;
                 long cod_bimestre = request.cod_bimestre;
-                long cod_serie = request.SerieDisciplinas.cod_serie;
-                long cod_disciplina = request.SerieDisciplinas.cod_disciplina;
+                long cod_serie = request.SerieDisciplina.cod_serie;
+                long cod_disciplina = request.SerieDisciplina.cod_disciplina;
 
                 var query = (
                         from daluno in _context.AlunoDisciplinas
                         where daluno.cod_aluno == cod_aluno
                             || daluno.cod_bimestre == cod_bimestre
-                            || daluno.SerieDisciplinas.cod_serie == cod_serie
-                            || daluno.SerieDisciplinas.cod_disciplina == cod_disciplina
+                            || daluno.SerieDisciplina.cod_serie == cod_serie
+                            || daluno.SerieDisciplina.cod_disciplina == cod_disciplina
                         select new
                         {
                             daluno,
-                            daluno.Alunos.nome,
-                            daluno.SerieDisciplinas.Serie.serie,
-                            daluno.SerieDisciplinas.Disciplina.disciplina,
-                            daluno.Bimestres.bimestre
+                            daluno.Aluno.nome,
+                            daluno.SerieDisciplina.Serie.serie,
+                            daluno.SerieDisciplina.Disciplina.disciplina,
+                            daluno.Bimestre.bimestre
                         }
                     ).ToList();
 

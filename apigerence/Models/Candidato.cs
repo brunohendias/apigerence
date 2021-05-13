@@ -13,19 +13,17 @@ namespace apigerence.Models
         [MaxLength(50)]
         public string nome { get; set; }
         [Required]
+        [ForeignKey("SerieVinculo")]
         public long cod_serie_v { get; set; }
         [Required]
+        [ForeignKey("Atencao")]
         public long cod_atencao { get; set; }
         [Required]
+        [ForeignKey("Inscricao")]
         public long cod_insc { get; set; }
 
-        [ForeignKey("cod_serie_v")]
-        public SerieVinculo InfosSerie { get; set; }
-
-        [ForeignKey("cod_atencao")]
+        public SerieVinculo SerieVinculo { get; set; }
         public Atencao Atencao { get; set; }
-
-        [ForeignKey("cod_insc")]
         public Inscricao Inscricao { get; set; }
     }
 }

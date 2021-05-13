@@ -15,22 +15,22 @@ namespace apigerence.Models
         [MaxLength(10)]
         public string num_matricula { get; set; }
         [Required]
+        [ForeignKey("Candidato")]
         public long cod_can { get; set; }
         [Required]
+        [ForeignKey("SerieVinculo")]
         public long cod_serie_v { get; set; }
         [Required]
+        [ForeignKey("Atencao")]
         public long cod_atencao { get; set; }
         [Required]
+        [ForeignKey("Situacao")]
         public long cod_situacao { get; set; }
 
-        [ForeignKey("cod_can")]
-        public Candidato Candidato { get; set; }
-        [ForeignKey("cod_serie_v")]
-        public SerieVinculo InfosSerie { get; set; }
-        [ForeignKey("cod_atencao")]
-        public Atencao Atencao { get; set; }
-        [ForeignKey("cod_situacao")]
-        public SituacaoAluno Situacao { get; set; }
+        public virtual Candidato Candidato { get; set; }
+        public virtual SerieVinculo SerieVinculo { get; set; }
+        public virtual Atencao Atencao { get; set; }
+        public virtual SituacaoAluno Situacao { get; set; }
 
     }
 }

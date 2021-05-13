@@ -32,19 +32,17 @@ namespace apigerence.Models
         [MaxLength(90)]
         public string nom_pai { get; set; }
         [Required]
+        [ForeignKey("Serie")]
         public long cod_serie { get; set; }
         [Required]
+        [ForeignKey("Atencao")]
         public long cod_atencao { get; set; }
         [Required]
+        [ForeignKey("Turno")]
         public long cod_turno { get; set; }
 
-        [ForeignKey("cod_serie")]
         public Serie Serie { get; set; }
-
-        [ForeignKey("cod_atencao")]
         public Atencao Atencao { get; set; }
-
-        [ForeignKey("cod_turno")]
         public Turno Turno { get; set; }
     }
 }

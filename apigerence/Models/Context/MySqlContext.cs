@@ -19,7 +19,6 @@ namespace apigerence.Models.Context
         public DbSet<SerieDisciplina> SerieDisciplinas { get; set; }
         public DbSet<SerieVinculo> SerieVinculos { get; set; }
         public DbSet<AlunoDisciplina> AlunoDisciplinas { get; set; }
-        public DbSet<ProfessorVinculo> ProfessorVinculos { get; set; }
         public DbSet<SituacaoAluno> SituacaoAlunos { get; set; }
     }
 }

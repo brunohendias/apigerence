@@ -26,10 +26,10 @@ namespace apigerence.Controllers
                     select new {
                         candidato,
                         candidato.Atencao.atencao,
-                        candidato.InfosSerie.Serie.serie,
-                        candidato.InfosSerie.Turno.turno,
-                        candidato.InfosSerie.Turma.turma,
-                        candidato.InfosSerie.Professor.nom_prof
+                        candidato.SerieVinculo.Serie.serie,
+                        candidato.SerieVinculo.Turno.turno,
+                        candidato.SerieVinculo.Turma.turma,
+                        candidato.SerieVinculo.Professor.nom_prof
                     }
                 ).ToList();
 
