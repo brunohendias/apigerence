@@ -26,8 +26,8 @@ namespace apigerence.Controllers
                         select new
                         {
                             daluno.Aluno,
-                            daluno.SerieDisciplina.Serie.serie,
-                            daluno.SerieDisciplina.Disciplina.disciplina,
+                            daluno.SerieDisciplina.Serie,
+                            daluno.SerieDisciplina.Disciplina,
                             daluno.Bimestre.bimestre
                         }
                     ).ToList();
@@ -65,8 +65,8 @@ namespace apigerence.Controllers
                         {
                             daluno,
                             daluno.Aluno.nome,
-                            daluno.SerieDisciplina.Serie.serie,
-                            daluno.SerieDisciplina.Disciplina.disciplina,
+                            daluno.SerieDisciplina.Serie,
+                            daluno.SerieDisciplina.Disciplina,
                             daluno.Bimestre.bimestre
                         }
                     ).ToList();

@@ -22,8 +22,8 @@ namespace apigerence.Models
         [ForeignKey("Inscricao")]
         public long cod_insc { get; set; }
 
-        public SerieVinculo SerieVinculo { get; set; }
-        public Atencao Atencao { get; set; }
-        public Inscricao Inscricao { get; set; }
+        public virtual SerieVinculo SerieVinculo { get; set; }
+        public virtual Atencao Atencao { get; set; }
+        public virtual Inscricao Inscricao { get; set; }
     }
 }

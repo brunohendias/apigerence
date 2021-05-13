@@ -3,6 +3,7 @@ using apigerence.Models.Context;
 using apigerence.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace apigerence.Controllers
@@ -21,10 +22,7 @@ namespace apigerence.Controllers
                 msg.success = "Buscamos as disciplinas das séries com sucesso.";
                 msg.fail = "Não conseguimos encontrar as disciplinas das séries.";
 
-                var query = (
-                        from v in _context.SerieDisciplinas
-                        select new { v.cod_serie_disc, v.Serie, v.Disciplina }
-                    ).ToList();
+                List<SerieDisciplina> query = _context.SerieDisciplinas.ToList();
 
                 if (query.Count > 0) Dados = query;
 
@@ -45,10 +43,10 @@ namespace apigerence.Controllers
                 msg.fail = "Não conseguimos encontrar as disciplinas dessa série.";
 
                 var query = (
-                        from v in _context.SerieDisciplinas
-                        where v.cod_serie == request.cod_serie 
-                            || v.cod_disciplina == request.cod_disciplina
-                        select new { v.cod_serie_disc, v.Serie, v.Disciplina }
+                        from dados in _context.SerieDisciplinas
+                        where dados.cod_serie == request.cod_serie 
+                            || dados.cod_disciplina == request.cod_disciplina
+                        select dados
                     ).ToList();
 
                 if (query.Count > 0) Dados = query;

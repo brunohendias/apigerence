@@ -1,7 +1,9 @@
-﻿using apigerence.Models.Context;
+﻿using apigerence.Models;
+using apigerence.Models.Context;
 using apigerence.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace apigerence.Controllers
@@ -20,15 +22,7 @@ namespace apigerence.Controllers
                 msg.success = "Buscamos as inscrições com sucesso.";
                 msg.fail = "Não encontramos as inscrições.";
 
-                var query = (
-                    from inscricao in _context.Inscricoes
-                    select new {
-                        inscricao,
-                        inscricao.Serie.serie,
-                        inscricao.Atencao.atencao,
-                        inscricao.Turno.turno
-                    }
-                ).ToList();
+                List<Inscricao> query = _context.Inscricoes.ToList();
 
                 if (query.Count > 0) Dados = query;
 
@@ -51,12 +45,7 @@ namespace apigerence.Controllers
                 var query = (
                     from inscricao in _context.Inscricoes
                     where inscricao.cod_insc == id
-                    select new {
-                        inscricao,
-                        inscricao.Serie.serie,
-                        inscricao.Atencao.atencao,
-                        inscricao.Turno.turno
-                    }
+                    select inscricao
                 ).ToList();
 
                 if (query.Count > 0) Dados = query;
@@ -80,11 +69,7 @@ namespace apigerence.Controllers
                 var query = (
                     from endereco in _context.EnderecoInscs
                     where endereco.cod_insc == id
-                    select new
-                    {
-                        endereco,
-                        endereco.Inscricao
-                    }
+                    select endereco
                 ).ToList();
 
                 if (query.Count > 0) Dados = query;

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace apigerence.Models
@@ -15,7 +16,7 @@ namespace apigerence.Models
         [ForeignKey("Disciplina")]
         public long cod_disciplina { get; set; }
 
-        public Serie Serie { get; set; }
-        public Disciplina Disciplina { get; set; }
+        public virtual Serie Serie { get; set; }
+        public virtual Disciplina Disciplina { get; set; }
     }
 }

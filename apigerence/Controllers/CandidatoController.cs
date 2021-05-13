@@ -3,6 +3,7 @@ using apigerence.Models.Context;
 using apigerence.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace apigerence.Controllers
@@ -21,17 +22,7 @@ namespace apigerence.Controllers
                 msg.success = "Buscamos os candidatos com successo.";
                 msg.fail = "Não encontramos os candidatos.";
 
-                var query = (
-                    from candidato in _context.Candidatos
-                    select new {
-                        candidato,
-                        candidato.Atencao.atencao,
-                        candidato.SerieVinculo.Serie.serie,
-                        candidato.SerieVinculo.Turno.turno,
-                        candidato.SerieVinculo.Turma.turma,
-                        candidato.SerieVinculo.Professor.nom_prof
-                    }
-                ).ToList();
+                List<Candidato> query = _context.Candidatos.ToList();
 
                 if (query.Count > 0) Dados = query;
 

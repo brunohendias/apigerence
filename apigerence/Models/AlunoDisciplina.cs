@@ -21,8 +21,8 @@ namespace apigerence.Models
         [ForeignKey("Bimestre")]
         public long cod_bimestre { get; set; }
 
-        public Aluno Aluno { get; set; }
-        public SerieDisciplina SerieDisciplina { get; set; }
-        public Bimestre Bimestre { get; set; }
+        public virtual Aluno Aluno { get; set; }
+        public virtual SerieDisciplina SerieDisciplina { get; set; }
+        public virtual Bimestre Bimestre { get; set; }
     }
 }

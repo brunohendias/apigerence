@@ -41,8 +41,8 @@ namespace apigerence.Models
         [ForeignKey("Turno")]
         public long cod_turno { get; set; }
 
-        public Serie Serie { get; set; }
-        public Atencao Atencao { get; set; }
-        public Turno Turno { get; set; }
+        public virtual Serie Serie { get; set; }
+        public virtual Atencao Atencao { get; set; }
+        public virtual Turno Turno { get; set; }
     }
 }

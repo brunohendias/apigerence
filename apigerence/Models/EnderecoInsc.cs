@@ -28,6 +28,6 @@ namespace apigerence.Models
         [MaxLength(8)]
         public string cep { get; set; }
 
-        public Inscricao Inscricao { get; set; }
+        public virtual Inscricao Inscricao { get; set; }
     }
 }

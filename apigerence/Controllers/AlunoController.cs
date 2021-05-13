@@ -23,19 +23,7 @@ namespace apigerence.Controllers
                 msg.success = "Buscamos os alunos com sucesso.";
                 msg.fail = "Não conseguimos encontrar os alunos.";
 
-                var query = (
-                    from aluno in _context.Alunos
-                    select new
-                    {
-                        aluno,
-                        aluno.Atencao.atencao,
-                        aluno.Situacao.situacao,
-                        aluno.SerieVinculo.Serie.serie,
-                        aluno.SerieVinculo.Turno.turno,
-                        aluno.SerieVinculo.Turma.turma,
-                        aluno.SerieVinculo.Professor.nom_prof
-                    }
-                ).ToList();
+                List<Aluno> query = _context.Alunos.ToList();
 
                 if (query.Count > 0) Dados = query;
 

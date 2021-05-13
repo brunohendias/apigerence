@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using apigerence.Models.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Proxies;
 
 namespace apigerence
 {
@@ -27,7 +28,9 @@ namespace apigerence
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "apigerence", Version = "v1" }));
 
             var serverVersion = new MySqlServerVersion(new Version(8, 0, 21));
-            services.AddDbContext<MySqlContext>(options => options.UseMySql(Configuration["Connections:MySql"], serverVersion));
+            services.AddDbContext<MySqlContext>(options => options
+                .UseLazyLoadingProxies()
+                .UseMySql(Configuration["Connections:MySql"], serverVersion));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

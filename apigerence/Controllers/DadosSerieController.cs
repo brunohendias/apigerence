@@ -3,6 +3,7 @@ using apigerence.Models.Context;
 using apigerence.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace apigerence.Controllers
@@ -21,19 +22,9 @@ namespace apigerence.Controllers
                 msg.success = "Buscamos as informações das séries com successo.";
                 msg.fail = "Não encontramos as informações das séries.";
 
-                var query = (
-                    from dados in _context.SerieVinculos
-                    select new
-                    {
-                        dados,
-                        dados.Serie.serie,
-                        dados.Turno.turno,
-                        dados.Turma.turma,
-                        dados.Professor.nom_prof
-                    }
-                ).ToList();
+                List<SerieVinculo> query = _context.SerieVinculos.ToList();
 
-                 if (query.Count > 0) Dados = query;
+                if (query.Count > 0) Dados = query;
 
                 return MontaRetorno();
             }
@@ -54,9 +45,7 @@ namespace apigerence.Controllers
             Turma turma = _context.Turmas.Find(request.cod_turma);
             if (turma == null) return true;
             Professor professor = _context.Professores.Find(request.cod_prof);
-            if (professor == null) return true;
-
-            return false;
+            return professor == null;
         }
 
         [HttpPost]
@@ -106,14 +95,7 @@ namespace apigerence.Controllers
                 var query = (
                     from dados in _context.SerieVinculos
                     where dados.cod_serie_v == id
-                    select new
-                    {
-                        dados,
-                        dados.Serie.serie,
-                        dados.Turno.turno,
-                        dados.Turma.turma,
-                        dados.Professor.nom_prof
-                    }
+                    select dados
                 ).ToList();
 
                 if (query.Count > 0) Dados = query;
