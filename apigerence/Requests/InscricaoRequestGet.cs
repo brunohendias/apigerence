@@ -8,5 +8,6 @@
         public long cod_serie { get; set; }
         public long cod_atencao { get; set; }
         public long cod_turno { get; set; }
+        public object IsValid { get; internal set; }
     }
 }

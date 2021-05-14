@@ -44,36 +44,33 @@ namespace apigerence.Controllers
         [HttpPost("filtro")]
         public object Filtro([FromBody] InscricaoRequestGet request)
         {
+
             try
             {
                 msg.success = "Buscamos essas inscrições com sucesso.";
                 msg.fail = "Não encontramos essas inscrições.";
-
-                if (request.cod_serie == 0)
-                {
-                    var query = (
-                            from inscricao in _context.Inscricoes
-                            select new
-                            {
-                                inscricao,
-                                inscricao.Serie.serie,
-                                inscricao.Atencao.atencao,
-                                inscricao.Turno.turno
-                            }
-                        ).ToList();
-
-                    if (query.Count > 0) Dados = query;
-                } 
-                else
-                {
-                    var query = (
-                        from inscricao in _context.Inscricoes
-                        where inscricao.nome.Contains(request.nome)
+                
+                var query = (
+                    from inscricao in _context.Inscricoes
+                    where inscricao.nome.Contains(request.nome)
                             || inscricao.cpf == request.cpf
                             || inscricao.cod_serie == request.cod_serie
                             || inscricao.cod_turno == request.cod_turno
                             || inscricao.cod_atencao == request.cod_atencao
                             || inscricao.email == request.email
+                    select new
+                        {
+                            inscricao,
+                            inscricao.Serie.serie,
+                            inscricao.Atencao.atencao,
+                            inscricao.Turno.turno
+                        }
+                    ).ToList();
+
+                if (query.Count > 0)
+                {
+                    query = (
+                        from inscricao in _context.Inscricoes
                         select new
                         {
                             inscricao,
