@@ -1,5 +1,6 @@
 ﻿using apigerence.Models;
 using apigerence.Models.Context;
+using apigerence.Requests;
 using apigerence.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,7 +15,7 @@ namespace apigerence.Controllers
         public SerieDisciplinaController(MySqlContext context) : base(context) { }
 
         [HttpGet]
-        public object Get()
+        public object Get([FromQuery] SerieDisciplinaRequestGet request)
         {
             try
             {
@@ -23,30 +24,7 @@ namespace apigerence.Controllers
 
                 var query = (
                         from v in _context.SerieDisciplinas
-                        select new { v.cod_serie_disc, v.Serie, v.Disciplina }
-                    ).ToList();
-
-                if (query.Count > 0) Dados = query;
-
-                return MontaRetorno();
-            }
-            catch (Exception e)
-            {
-                return RespErrorLog(e);
-            }
-        }
-
-        [HttpGet("find")]
-        public object Find([FromQuery] SerieDisciplina request)
-        {
-            try
-            {
-                msg.success = "Buscamos as disciplinas dessa série com sucesso.";
-                msg.fail = "Não conseguimos encontrar as disciplinas dessa série.";
-
-                var query = (
-                        from v in _context.SerieDisciplinas
-                        where v.cod_serie == request.cod_serie 
+                        where v.cod_serie == request.cod_serie
                             || v.cod_disciplina == request.cod_disciplina
                         select new { v.cod_serie_disc, v.Serie, v.Disciplina }
                     ).ToList();
@@ -62,7 +40,7 @@ namespace apigerence.Controllers
         }
 
         [HttpPost]
-        public object Post(SerieDisciplina request)
+        public object Post(SerieDisciplinaRequestPost request)
         {
             try
             {

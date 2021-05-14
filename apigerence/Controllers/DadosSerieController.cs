@@ -1,5 +1,6 @@
 ﻿using apigerence.Models;
 using apigerence.Models.Context;
+using apigerence.Requests;
 using apigerence.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,7 +15,7 @@ namespace apigerence.Controllers
         public DadosSerieController(MySqlContext context) : base(context) { }
 
         [HttpGet]
-        public object Get()
+        public object Get([FromQuery] SerieVinculoRequestGet request)
         {
             try
             {
@@ -23,6 +24,10 @@ namespace apigerence.Controllers
 
                 var query = (
                     from dados in _context.SerieVinculos
+                    where dados.cod_serie == request.cod_serie
+                        || dados.cod_turno == request.cod_turno
+                        || dados.cod_turma == request.cod_turma
+                        || dados.cod_prof == request.cod_prof
                     select new
                     {
                         dados,
@@ -45,7 +50,7 @@ namespace apigerence.Controllers
 
         private SerieVinculo Find(long id) => _context.SerieVinculos.Find(id);
 
-        private bool DadosInvalido(SerieVinculo request)
+        private bool DadosInvalido(SerieVinculoRequestPost request)
         {
             Serie serie = _context.Series.Find(request.cod_serie);
             if (serie == null) return true;
@@ -60,7 +65,7 @@ namespace apigerence.Controllers
         }
 
         [HttpPost]
-        public object Post([FromBody] SerieVinculo request)
+        public object Post([FromBody] SerieVinculoRequestPost request)
         {
             try
             {
@@ -127,7 +132,7 @@ namespace apigerence.Controllers
         }
 
         [HttpPut]
-        public object Put([FromBody] SerieVinculo request)
+        public object Put([FromBody] SerieVinculoRequestPost request)
         {
             try
             {
