@@ -27,10 +27,10 @@ namespace apigerence.Models
         [ForeignKey("Situacao")]
         public long cod_situacao { get; set; }
 
-        public virtual Candidato Candidato { get; set; }
-        public virtual SerieVinculo SerieVinculo { get; set; }
-        public virtual Atencao Atencao { get; set; }
-        public virtual SituacaoAluno Situacao { get; set; }
+        public Candidato Candidato { get; set; }
+        public SerieVinculo SerieVinculo { get; set; }
+        public Atencao Atencao { get; set; }
+        public SituacaoAluno Situacao { get; set; }
 
     }
 }

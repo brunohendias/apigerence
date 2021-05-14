@@ -3,7 +3,6 @@ using apigerence.Models.Context;
 using apigerence.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace apigerence.Controllers
@@ -51,7 +50,7 @@ namespace apigerence.Controllers
 
         private SerieVinculo BuscaDadosSerie(long cod_serie_v) => _context.SerieVinculos.Find(cod_serie_v);
 
-        private static string GeraRA(Aluno request) => 
+        private string GeraRA(Aluno request) => 
             "" + request.cod_can + request.cod_atencao + request.cod_situacao + request.cod_serie_v + request.cod_atencao;
 
         [HttpPost]

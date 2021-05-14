@@ -1,5 +1,6 @@
 ﻿using apigerence.Models;
 using apigerence.Models.Context;
+using apigerence.Models.Requests;
 using apigerence.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -43,24 +44,19 @@ namespace apigerence.Controllers
         }
 
         [HttpGet("notas")]
-        public object Notas([FromQuery] AlunoDisciplina request)
+        public object Notas([FromQuery] AlunoDisciplinaRequest request)
         {
             try
             {
                 msg.success = "Buscamos as notas desse alunos com sucesso.";
                 msg.fail = "Não encontramos as notas desse alunos.";
 
-                long cod_aluno = request.cod_aluno;
-                long cod_bimestre = request.cod_bimestre;
-                long cod_serie = request.SerieDisciplina.cod_serie;
-                long cod_disciplina = request.SerieDisciplina.cod_disciplina;
-
                 var query = (
                         from daluno in _context.AlunoDisciplinas
-                        where daluno.cod_aluno == cod_aluno
-                            || daluno.cod_bimestre == cod_bimestre
-                            || daluno.SerieDisciplina.cod_serie == cod_serie
-                            || daluno.SerieDisciplina.cod_disciplina == cod_disciplina
+                        where daluno.cod_aluno == request.cod_aluno
+                            || daluno.cod_bimestre == request.cod_bimestre
+                            || daluno.SerieDisciplina.cod_serie == request.cod_serie
+                            || daluno.SerieDisciplina.cod_disciplina == request.cod_disciplina
                         select new
                         {
                             daluno,
