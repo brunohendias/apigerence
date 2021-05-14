@@ -1,4 +1,5 @@
 ﻿using apigerence.Models.Context;
+using apigerence.Requests;
 using apigerence.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -23,6 +24,41 @@ namespace apigerence.Controllers
                 var query = (
                     from inscricao in _context.Inscricoes
                     select new {
+                        inscricao,
+                        inscricao.Serie.serie,
+                        inscricao.Atencao.atencao,
+                        inscricao.Turno.turno
+                    }
+                ).ToList();
+
+                if (query.Count > 0) Dados = query;
+
+                return MontaRetorno();
+            }
+            catch (Exception e)
+            {
+                return RespErrorLog(e);
+            }
+        }
+
+        [HttpPost("filtro")]
+        public object Filtro([FromBody] InscricaoRequestGet request)
+        {
+            try
+            {
+                msg.success = "Buscamos essas inscrições com sucesso.";
+                msg.fail = "Não encontramos essas inscrições.";
+
+                var query = (
+                    from inscricao in _context.Inscricoes
+                    where inscricao.nome.Contains(request.nome)
+                        || inscricao.cpf == request.cpf
+                        || inscricao.cod_serie == request.cod_serie
+                        || inscricao.cod_turno == request.cod_turno
+                        || inscricao.cod_atencao == request.cod_atencao
+                        || inscricao.email == request.email
+                    select new
+                    {
                         inscricao,
                         inscricao.Serie.serie,
                         inscricao.Atencao.atencao,
