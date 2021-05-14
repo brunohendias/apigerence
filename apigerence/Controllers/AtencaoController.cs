@@ -34,6 +34,40 @@ namespace apigerence.Controllers
             }
         }
 
+        [HttpGet("inscricoes")]
+        public object InscricoesPorAtencao()
+        {
+            try
+            {
+                msg.success = "Buscamos as inscrições com essas atenções com sucesso.";
+                msg.fail = "Não encontramos as inscrições com essas atenções.";
+
+                long[] atencoes = new long[] { 1, 3, 5 };
+
+                var query = (from atencao in _context.Atencoes
+                             where atencoes.Contains(atencao.cod_atencao)
+                             select new
+                             {
+                                 atencao,
+                                 inscricoes = (from insc in _context.Inscricoes
+                                               where insc.cod_atencao == atencao.cod_atencao
+                                               select new
+                                               {
+                                                   insc.cod_insc,
+                                                   insc.nome
+                                               }).ToList()
+                             }).ToList();
+
+                if (query.Count > 0) Dados = query;
+
+                return MontaRetorno();
+            }
+            catch (Exception e)
+            {
+                return RespErrorLog(e);
+            }
+        }
+
         [HttpPost]
         public object Post([FromBody] Atencao request)
         {
