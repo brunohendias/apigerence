@@ -49,13 +49,7 @@ namespace apigerence.Controllers
                              select new
                              {
                                  atencao,
-                                 inscricoes = (from insc in _context.Inscricoes
-                                               where insc.cod_atencao == atencao.cod_atencao
-                                               select new
-                                               {
-                                                   insc.cod_insc,
-                                                   insc.nome
-                                               }).ToList()
+                                 atencao.Inscricoes
                              }).ToList();
 
                 if (query.Count > 0) Dados = query;
