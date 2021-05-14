@@ -1,6 +1,6 @@
-﻿namespace apigerence.Models.Requests
+﻿namespace apigerence.Requests
 {
-    public class AlunoDisciplinaRequest
+    public class AlunoDisciplinaRequestGet
     {
         public long cod_aluno { get; set; }
         public long cod_serie { get; set; }

@@ -1,6 +1,6 @@
 ﻿using apigerence.Models;
 using apigerence.Models.Context;
-using apigerence.Models.Requests;
+using apigerence.Requests;
 using apigerence.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -44,7 +44,7 @@ namespace apigerence.Controllers
         }
 
         [HttpGet("notas")]
-        public object Notas([FromQuery] AlunoDisciplinaRequest request)
+        public object Notas([FromQuery] AlunoDisciplinaRequestGet request)
         {
             try
             {
@@ -77,7 +77,7 @@ namespace apigerence.Controllers
             }
         }
 
-        private bool DadosInvalido(AlunoDisciplina request)
+        private bool DadosInvalido(AlunoDisciplinaRequestPost request)
         {
             if (request.nota > 100 || request.nota < 0) return true;
             Aluno aluno = _context.Alunos.Find(request.cod_aluno);
@@ -89,7 +89,7 @@ namespace apigerence.Controllers
         }
 
         [HttpPost]
-        public object Post([FromBody] AlunoDisciplina request)
+        public object Post([FromBody] AlunoDisciplinaRequestPost request)
         {
             try
             {
@@ -124,7 +124,7 @@ namespace apigerence.Controllers
         }
 
         [HttpPut]
-        public object Put([FromBody] AlunoDisciplina request)
+        public object Put([FromBody] AlunoDisciplinaRequestPost request)
         {
             try
             {
