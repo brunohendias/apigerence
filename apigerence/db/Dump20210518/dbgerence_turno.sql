@@ -1,8 +1,6 @@
-CREATE DATABASE  IF NOT EXISTS `brunoh67_dbgerence` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `brunoh67_dbgerence`;
 -- MySQL dump 10.13  Distrib 8.0.24, for Win64 (x86_64)
 --
--- Host: localhost    Database: brunoh67_dbgerence
+-- Host: localhost    Database: dbgerence
 -- ------------------------------------------------------
 -- Server version	8.0.24
 
@@ -18,29 +16,35 @@ USE `brunoh67_dbgerence`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `situacao_aluno`
+-- Position to start replication or point-in-time recovery from
 --
 
-DROP TABLE IF EXISTS `situacao_aluno`;
+-- CHANGE MASTER TO MASTER_LOG_FILE='DESKTOP-AABFF8I-bin.000028', MASTER_LOG_POS=156;
+
+--
+-- Table structure for table `turno`
+--
+
+DROP TABLE IF EXISTS `turno`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `situacao_aluno` (
-  `cod_situacao` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `situacao` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE `turno` (
+  `cod_turno` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `turno` char(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`cod_situacao`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`cod_turno`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `situacao_aluno`
+-- Dumping data for table `turno`
 --
 
-LOCK TABLES `situacao_aluno` WRITE;
-/*!40000 ALTER TABLE `situacao_aluno` DISABLE KEYS */;
-INSERT INTO `situacao_aluno` VALUES (1,'Aprovado',NULL,NULL),(2,'Reprovado',NULL,NULL),(3,'Cursando',NULL,NULL),(4,'Evadido',NULL,NULL),(5,'Trocou de turma',NULL,NULL),(6,'Formado',NULL,NULL);
-/*!40000 ALTER TABLE `situacao_aluno` ENABLE KEYS */;
+LOCK TABLES `turno` WRITE;
+/*!40000 ALTER TABLE `turno` DISABLE KEYS */;
+INSERT INTO `turno` VALUES (1,'Manhã',NULL,NULL),(2,'Tarde',NULL,NULL);
+/*!40000 ALTER TABLE `turno` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-12 17:36:21
+-- Dump completed on 2021-05-18 13:10:00
