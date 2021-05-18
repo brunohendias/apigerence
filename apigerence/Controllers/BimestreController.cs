@@ -21,8 +21,7 @@ namespace apigerence.Controllers
                 msg.fail = "Não conseguimos encontrar os bimestres.";
 
                 var query = (
-                        from bimestre in _context.Bimestres
-                        select bimestre
+                        from bimestre in _context.Bimestres select bimestre
                     ).ToList();
 
                 if (query.Count > 0) Dados = query;
