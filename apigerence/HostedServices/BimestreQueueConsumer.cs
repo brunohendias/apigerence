@@ -1,5 +1,4 @@
 ﻿using apigerence.Models;
-using apigerence.Models.Context;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -15,14 +14,12 @@ namespace apigerence.HostedServices
     {
         static IQueueClient _queueClient;
         private readonly IConfiguration _config;
-        private readonly MySqlContext _context;
 
-        public BimestreQueueConsumer(MySqlContext context, IConfiguration config)
+        public BimestreQueueConsumer(IConfiguration config)
         {
             _config = config;
-            string serviceBusConnection = _config.GetValue<string>("AzureServiceBus");
-            _queueClient = new QueueClient(serviceBusConnection, "product");
-            _context = context;
+            var serviceBusConnection = _config.GetValue<string>("AzureServiceBus");
+            _queueClient = new QueueClient(serviceBusConnection, "bimestre");
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
@@ -55,11 +52,9 @@ namespace apigerence.HostedServices
             Console.WriteLine("### Processing Message - Queue ###");
             Console.WriteLine($"{DateTime.Now}");
             Console.WriteLine($"Received message: SequenceNumber:{message.SystemProperties.SequenceNumber} Body:{Encoding.UTF8.GetString(message.Body)}");
-            Bimestre request = JsonSerializer.Deserialize<Bimestre>(message.Body);
+            var request = JsonSerializer.Deserialize<Bimestre>(message.Body);
 
             // Dar sequencia com os dados recebidos da fila na variavel request
-            _context.Bimestres.Add(request);
-            _context.SaveChanges();
 
             await _queueClient.CompleteAsync(message.SystemProperties.LockToken);
         }

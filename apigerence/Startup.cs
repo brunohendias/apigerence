@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using apigerence.Models.Context;
 using Microsoft.EntityFrameworkCore;
+using apigerence.HostedServices;
 
 namespace apigerence
 {
@@ -22,12 +23,13 @@ namespace apigerence
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "apigerence", Version = "v1" }));
 
             var serverVersion = new MySqlServerVersion(new Version(8, 0, 21));
             services.AddDbContext<MySqlContext>(options => options.UseMySql(Configuration["Connections:MySql"], serverVersion));
+
+            services.AddHostedService<BimestreQueueConsumer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
