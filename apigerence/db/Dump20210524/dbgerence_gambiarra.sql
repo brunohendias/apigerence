@@ -16,35 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Position to start replication or point-in-time recovery from
+-- Table structure for table `gambiarra`
 --
 
--- CHANGE MASTER TO MASTER_LOG_FILE='DESKTOP-AABFF8I-bin.000017', MASTER_LOG_POS=156;
-
---
--- Table structure for table `serie`
---
-
-DROP TABLE IF EXISTS `serie`;
+DROP TABLE IF EXISTS `gambiarra`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `serie` (
-  `cod_serie` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `serie` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`cod_serie`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `gambiarra` (
+  `codinsc` int NOT NULL AUTO_INCREMENT,
+  `codconc` int NOT NULL,
+  `teste` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`codinsc`,`codconc`),
+  KEY `IDX_concurso` (`codconc`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `serie`
+-- Dumping data for table `gambiarra`
 --
 
-LOCK TABLES `serie` WRITE;
-/*!40000 ALTER TABLE `serie` DISABLE KEYS */;
-INSERT INTO `serie` VALUES (1,'1ª Ano Ensino Fundamental',NULL,NULL),(2,'2ª Ano Ensino Fundamental',NULL,NULL),(3,'3ª Ano Ensino Fundamental',NULL,NULL),(4,'4ª Ano Ensino Fundamental',NULL,NULL),(5,'5ª Ano Ensino Fundamental',NULL,NULL),(6,'6ª Ano Ensino Fundamental',NULL,NULL),(7,'7ª Ano Ensino Fundamental',NULL,NULL),(8,'8ª Ano Ensino Fundamental',NULL,NULL),(9,'9ª Ano Ensino Fundamental',NULL,NULL),(10,'1ª Ano Ensino Médio',NULL,NULL),(11,'2ª Ano Ensino Médio',NULL,NULL),(12,'3ª Ano Ensino Médio',NULL,NULL);
-/*!40000 ALTER TABLE `serie` ENABLE KEYS */;
+LOCK TABLES `gambiarra` WRITE;
+/*!40000 ALTER TABLE `gambiarra` DISABLE KEYS */;
+INSERT INTO `gambiarra` VALUES (1,1,'Gambiarra Mae'),(2,1,'Gambiarra Mae 2');
+/*!40000 ALTER TABLE `gambiarra` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-18 13:09:51
+-- Dump completed on 2021-05-24 11:27:42

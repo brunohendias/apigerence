@@ -16,35 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Position to start replication or point-in-time recovery from
+-- Table structure for table `gambiarra2`
 --
 
--- CHANGE MASTER TO MASTER_LOG_FILE='DESKTOP-AABFF8I-bin.000011', MASTER_LOG_POS=156;
-
---
--- Table structure for table `professor`
---
-
-DROP TABLE IF EXISTS `professor`;
+DROP TABLE IF EXISTS `gambiarra2`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `professor` (
-  `cod_prof` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `nom_prof` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`cod_prof`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `gambiarra2` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `teste` varchar(45) NOT NULL,
+  `codinsc` int NOT NULL,
+  `codconc` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_Gambi_Insc_idx` (`codinsc`),
+  KEY `FK_Gambi_Conc_idx` (`codconc`),
+  CONSTRAINT `FK_Gambi_Conc` FOREIGN KEY (`codconc`) REFERENCES `gambiarra` (`codconc`),
+  CONSTRAINT `FK_Gambi_Insc` FOREIGN KEY (`codinsc`) REFERENCES `gambiarra` (`codinsc`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `professor`
+-- Dumping data for table `gambiarra2`
 --
 
-LOCK TABLES `professor` WRITE;
-/*!40000 ALTER TABLE `professor` DISABLE KEYS */;
-INSERT INTO `professor` VALUES (1,'Andre',NULL,NULL),(2,'Maria',NULL,NULL),(3,'Marta',NULL,NULL),(4,'Bernardo',NULL,NULL),(5,'Pedro',NULL,NULL),(6,'Camila',NULL,NULL),(7,'Vanessa',NULL,NULL),(8,'Rodrigo',NULL,NULL),(9,'Leonora',NULL,NULL),(10,'Leticia',NULL,NULL),(11,'Marilda',NULL,NULL),(12,'Paula',NULL,NULL),(13,'Sonia',NULL,NULL);
-/*!40000 ALTER TABLE `professor` ENABLE KEYS */;
+LOCK TABLES `gambiarra2` WRITE;
+/*!40000 ALTER TABLE `gambiarra2` DISABLE KEYS */;
+INSERT INTO `gambiarra2` VALUES (1,'Gambiarra filha',1,1),(2,'Gambiarra filha 2',2,1);
+/*!40000 ALTER TABLE `gambiarra2` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-18 13:09:46
+-- Dump completed on 2021-05-24 11:27:50

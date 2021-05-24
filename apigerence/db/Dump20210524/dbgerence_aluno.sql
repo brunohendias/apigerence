@@ -16,35 +16,42 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Position to start replication or point-in-time recovery from
+-- Table structure for table `aluno`
 --
 
--- CHANGE MASTER TO MASTER_LOG_FILE='DESKTOP-AABFF8I-bin.000015', MASTER_LOG_POS=156;
-
---
--- Table structure for table `atencao`
---
-
-DROP TABLE IF EXISTS `atencao`;
+DROP TABLE IF EXISTS `aluno`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `atencao` (
-  `cod_atencao` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `atencao` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE `aluno` (
+  `cod_aluno` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `nome` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `num_matricula` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cod_can` bigint unsigned NOT NULL,
+  `cod_serie_v` bigint unsigned NOT NULL,
+  `cod_atencao` bigint unsigned NOT NULL,
+  `cod_situacao` bigint unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`cod_atencao`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`cod_aluno`),
+  KEY `aluno_cod_can_foreign` (`cod_can`),
+  KEY `aluno_cod_serie_v_foreign` (`cod_serie_v`),
+  KEY `aluno_cod_atencao_foreign` (`cod_atencao`),
+  KEY `aluno_cod_situacao_foreign` (`cod_situacao`),
+  CONSTRAINT `aluno_cod_atencao_foreign` FOREIGN KEY (`cod_atencao`) REFERENCES `atencao` (`cod_atencao`),
+  CONSTRAINT `aluno_cod_can_foreign` FOREIGN KEY (`cod_can`) REFERENCES `candidato` (`cod_can`),
+  CONSTRAINT `aluno_cod_serie_v_foreign` FOREIGN KEY (`cod_serie_v`) REFERENCES `serie_v` (`cod_serie_v`),
+  CONSTRAINT `aluno_cod_situacao_foreign` FOREIGN KEY (`cod_situacao`) REFERENCES `situacao_aluno` (`cod_situacao`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `atencao`
+-- Dumping data for table `aluno`
 --
 
-LOCK TABLES `atencao` WRITE;
-/*!40000 ALTER TABLE `atencao` DISABLE KEYS */;
-INSERT INTO `atencao` VALUES (1,'Nenhuma',NULL,NULL),(2,'Nescessidades especiais',NULL,NULL),(3,'Hiperativo',NULL,NULL),(4,'Déficit de atenção',NULL,NULL),(5,'Conduta agressiva',NULL,NULL);
-/*!40000 ALTER TABLE `atencao` ENABLE KEYS */;
+LOCK TABLES `aluno` WRITE;
+/*!40000 ALTER TABLE `aluno` DISABLE KEYS */;
+INSERT INTO `aluno` VALUES (5,'Bruno Dias','250105',2,10,5,3,NULL,NULL);
+/*!40000 ALTER TABLE `aluno` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +63,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-18 13:09:49
+-- Dump completed on 2021-05-24 11:27:44

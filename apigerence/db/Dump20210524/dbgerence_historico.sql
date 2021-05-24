@@ -16,35 +16,39 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Position to start replication or point-in-time recovery from
+-- Table structure for table `historico`
 --
 
--- CHANGE MASTER TO MASTER_LOG_FILE='DESKTOP-AABFF8I-bin.000028', MASTER_LOG_POS=156;
-
---
--- Table structure for table `turno`
---
-
-DROP TABLE IF EXISTS `turno`;
+DROP TABLE IF EXISTS `historico`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `turno` (
-  `cod_turno` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `turno` char(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE `historico` (
+  `cod_historico` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `cod_aluno` bigint unsigned NOT NULL,
+  `cod_serie` bigint unsigned NOT NULL,
+  `cod_prof` bigint unsigned NOT NULL,
+  `cod_situacao` bigint unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`cod_turno`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`cod_historico`),
+  KEY `historico_cod_aluno_foreign` (`cod_aluno`),
+  KEY `historico_cod_serie_foreign` (`cod_serie`),
+  KEY `historico_cod_prof_foreign` (`cod_prof`),
+  KEY `historico_cod_situacao_foreign` (`cod_situacao`),
+  CONSTRAINT `historico_cod_aluno_foreign` FOREIGN KEY (`cod_aluno`) REFERENCES `aluno` (`cod_aluno`),
+  CONSTRAINT `historico_cod_prof_foreign` FOREIGN KEY (`cod_prof`) REFERENCES `professor` (`cod_prof`),
+  CONSTRAINT `historico_cod_serie_foreign` FOREIGN KEY (`cod_serie`) REFERENCES `serie` (`cod_serie`),
+  CONSTRAINT `historico_cod_situacao_foreign` FOREIGN KEY (`cod_situacao`) REFERENCES `situacao_aluno` (`cod_situacao`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `turno`
+-- Dumping data for table `historico`
 --
 
-LOCK TABLES `turno` WRITE;
-/*!40000 ALTER TABLE `turno` DISABLE KEYS */;
-INSERT INTO `turno` VALUES (1,'Manhã',NULL,NULL),(2,'Tarde',NULL,NULL);
-/*!40000 ALTER TABLE `turno` ENABLE KEYS */;
+LOCK TABLES `historico` WRITE;
+/*!40000 ALTER TABLE `historico` DISABLE KEYS */;
+/*!40000 ALTER TABLE `historico` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-18 13:10:00
+-- Dump completed on 2021-05-24 11:27:46

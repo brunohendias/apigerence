@@ -16,42 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Position to start replication or point-in-time recovery from
+-- Table structure for table `serie`
 --
 
--- CHANGE MASTER TO MASTER_LOG_FILE='DESKTOP-AABFF8I-bin.000020', MASTER_LOG_POS=156;
-
---
--- Table structure for table `users`
---
-
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `serie`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
-  `avatar` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `id_provider` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `password` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `serie` (
+  `cod_serie` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `serie` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`cod_serie`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `serie`
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Bruno','brunodiashen@gmail.com',NULL,'https://avatars.githubusercontent.com/u/47764203?v=4','47764203','$2y$10$cBWI/ZZzRapORNkIXHDGAO1FmHZY5OQF.fxkJEXeNJgCJCVrCiZHG',NULL,'2021-04-18 05:05:53','2021-04-18 05:05:53');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+LOCK TABLES `serie` WRITE;
+/*!40000 ALTER TABLE `serie` DISABLE KEYS */;
+INSERT INTO `serie` VALUES (1,'1ª Ano Ensino Fundamental',NULL,NULL),(2,'2ª Ano Ensino Fundamental',NULL,NULL),(3,'3ª Ano Ensino Fundamental',NULL,NULL),(4,'4ª Ano Ensino Fundamental',NULL,NULL),(5,'5ª Ano Ensino Fundamental',NULL,NULL),(6,'6ª Ano Ensino Fundamental',NULL,NULL),(7,'7ª Ano Ensino Fundamental',NULL,NULL),(8,'8ª Ano Ensino Fundamental',NULL,NULL),(9,'9ª Ano Ensino Fundamental',NULL,NULL),(10,'1ª Ano Ensino Médio',NULL,NULL),(11,'2ª Ano Ensino Médio',NULL,NULL),(12,'3ª Ano Ensino Médio',NULL,NULL);
+/*!40000 ALTER TABLE `serie` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -63,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-18 13:09:54
+-- Dump completed on 2021-05-24 11:27:39

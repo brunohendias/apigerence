@@ -16,35 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Position to start replication or point-in-time recovery from
+-- Table structure for table `turma`
 --
 
--- CHANGE MASTER TO MASTER_LOG_FILE='DESKTOP-AABFF8I-bin.000019', MASTER_LOG_POS=156;
-
---
--- Table structure for table `disciplina`
---
-
-DROP TABLE IF EXISTS `disciplina`;
+DROP TABLE IF EXISTS `turma`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `disciplina` (
-  `cod_disciplina` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `disciplina` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE `turma` (
+  `cod_turma` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `turma` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`cod_disciplina`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`cod_turma`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `disciplina`
+-- Dumping data for table `turma`
 --
 
-LOCK TABLES `disciplina` WRITE;
-/*!40000 ALTER TABLE `disciplina` DISABLE KEYS */;
-INSERT INTO `disciplina` VALUES (1,'Língua Portuguesa',NULL,NULL),(2,'Matemática',NULL,NULL),(3,'História',NULL,NULL),(4,'Geografia',NULL,NULL),(5,'Ciências',NULL,NULL),(6,'Artes',NULL,NULL),(7,'Inglês',NULL,NULL),(8,'Química',NULL,NULL),(9,'Física',NULL,NULL),(10,'Biologia',NULL,NULL),(11,'Sociologia',NULL,NULL),(12,'Filosofia',NULL,NULL),(13,'Espanhol',NULL,NULL),(14,'Educação Física',NULL,NULL);
-/*!40000 ALTER TABLE `disciplina` ENABLE KEYS */;
+LOCK TABLES `turma` WRITE;
+/*!40000 ALTER TABLE `turma` DISABLE KEYS */;
+INSERT INTO `turma` VALUES (1,'A',NULL,NULL),(2,'B',NULL,NULL),(3,'C',NULL,NULL),(4,'D',NULL,NULL);
+/*!40000 ALTER TABLE `turma` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-18 13:09:53
+-- Dump completed on 2021-05-24 11:27:39

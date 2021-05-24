@@ -16,43 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Position to start replication or point-in-time recovery from
+-- Table structure for table `professor`
 --
 
--- CHANGE MASTER TO MASTER_LOG_FILE='DESKTOP-AABFF8I-bin.000029', MASTER_LOG_POS=156;
-
---
--- Table structure for table `endereco_insc`
---
-
-DROP TABLE IF EXISTS `endereco_insc`;
+DROP TABLE IF EXISTS `professor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `endereco_insc` (
-  `cod_endereco_insc` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `cod_insc` bigint unsigned NOT NULL,
-  `estado` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cidade` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `bairro` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `rua` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `numero` int NOT NULL,
-  `cep` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `professor` (
+  `cod_prof` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `nom_prof` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`cod_endereco_insc`),
-  KEY `endereco_insc_cod_insc_foreign` (`cod_insc`),
-  CONSTRAINT `endereco_insc_cod_insc_foreign` FOREIGN KEY (`cod_insc`) REFERENCES `inscricao` (`cod_insc`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`cod_prof`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `endereco_insc`
+-- Dumping data for table `professor`
 --
 
-LOCK TABLES `endereco_insc` WRITE;
-/*!40000 ALTER TABLE `endereco_insc` DISABLE KEYS */;
-INSERT INTO `endereco_insc` VALUES (1,1,'MG','Belo-Horizonte','Buritis','José Hemeterio',382,'35560000',NULL,NULL);
-/*!40000 ALTER TABLE `endereco_insc` ENABLE KEYS */;
+LOCK TABLES `professor` WRITE;
+/*!40000 ALTER TABLE `professor` DISABLE KEYS */;
+INSERT INTO `professor` VALUES (1,'Andre',NULL,NULL),(2,'Maria',NULL,NULL),(3,'Marta',NULL,NULL),(4,'Bernardo',NULL,NULL),(5,'Pedro',NULL,NULL),(6,'Camila',NULL,NULL),(7,'Vanessa',NULL,NULL),(8,'Rodrigo',NULL,NULL),(9,'Leonora',NULL,NULL),(10,'Leticia',NULL,NULL),(11,'Marilda',NULL,NULL),(12,'Paula',NULL,NULL),(13,'Sonia',NULL,NULL);
+/*!40000 ALTER TABLE `professor` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -64,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-18 13:10:01
+-- Dump completed on 2021-05-24 11:27:41

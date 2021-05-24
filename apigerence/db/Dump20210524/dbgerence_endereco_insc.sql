@@ -16,35 +16,37 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Position to start replication or point-in-time recovery from
+-- Table structure for table `endereco_insc`
 --
 
--- CHANGE MASTER TO MASTER_LOG_FILE='DESKTOP-AABFF8I-bin.000031', MASTER_LOG_POS=156;
-
---
--- Table structure for table `situacao_aluno`
---
-
-DROP TABLE IF EXISTS `situacao_aluno`;
+DROP TABLE IF EXISTS `endereco_insc`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `situacao_aluno` (
-  `cod_situacao` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `situacao` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE `endereco_insc` (
+  `cod_endereco_insc` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `cod_insc` bigint unsigned NOT NULL,
+  `estado` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cidade` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bairro` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rua` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `numero` int NOT NULL,
+  `cep` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`cod_situacao`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`cod_endereco_insc`),
+  KEY `endereco_insc_cod_insc_foreign` (`cod_insc`),
+  CONSTRAINT `endereco_insc_cod_insc_foreign` FOREIGN KEY (`cod_insc`) REFERENCES `inscricao` (`cod_insc`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `situacao_aluno`
+-- Dumping data for table `endereco_insc`
 --
 
-LOCK TABLES `situacao_aluno` WRITE;
-/*!40000 ALTER TABLE `situacao_aluno` DISABLE KEYS */;
-INSERT INTO `situacao_aluno` VALUES (1,'Aprovado',NULL,NULL),(2,'Reprovado',NULL,NULL),(3,'Cursando',NULL,NULL),(4,'Evadido',NULL,NULL),(5,'Trocou de turma',NULL,NULL),(6,'Formado',NULL,NULL);
-/*!40000 ALTER TABLE `situacao_aluno` ENABLE KEYS */;
+LOCK TABLES `endereco_insc` WRITE;
+/*!40000 ALTER TABLE `endereco_insc` DISABLE KEYS */;
+INSERT INTO `endereco_insc` VALUES (1,1,'MG','Belo-Horizonte','Buritis','José Hemeterio',382,'35560000',NULL,NULL);
+/*!40000 ALTER TABLE `endereco_insc` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-18 13:10:04
+-- Dump completed on 2021-05-24 11:27:41

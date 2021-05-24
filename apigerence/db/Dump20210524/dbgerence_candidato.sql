@@ -16,34 +16,38 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Position to start replication or point-in-time recovery from
+-- Table structure for table `candidato`
 --
 
--- CHANGE MASTER TO MASTER_LOG_FILE='DESKTOP-AABFF8I-bin.000018', MASTER_LOG_POS=156;
-
---
--- Table structure for table `bimestre`
---
-
-DROP TABLE IF EXISTS `bimestre`;
+DROP TABLE IF EXISTS `candidato`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `bimestre` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `bimestre` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `bimestre_UNIQUE` (`bimestre`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+CREATE TABLE `candidato` (
+  `cod_can` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `nome` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cod_serie_v` bigint unsigned NOT NULL,
+  `cod_atencao` bigint unsigned NOT NULL,
+  `cod_insc` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`cod_can`),
+  KEY `candidato_cod_serie_v_foreign` (`cod_serie_v`),
+  KEY `candidato_cod_atencao_foreign` (`cod_atencao`),
+  KEY `candidato_cod_insc_foreign` (`cod_insc`),
+  CONSTRAINT `candidato_cod_atencao_foreign` FOREIGN KEY (`cod_atencao`) REFERENCES `atencao` (`cod_atencao`),
+  CONSTRAINT `candidato_cod_insc_foreign` FOREIGN KEY (`cod_insc`) REFERENCES `inscricao` (`cod_insc`),
+  CONSTRAINT `candidato_cod_serie_v_foreign` FOREIGN KEY (`cod_serie_v`) REFERENCES `serie_v` (`cod_serie_v`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `bimestre`
+-- Dumping data for table `candidato`
 --
 
-LOCK TABLES `bimestre` WRITE;
-/*!40000 ALTER TABLE `bimestre` DISABLE KEYS */;
-INSERT INTO `bimestre` VALUES (1,'1º Bimestre'),(2,'2º Bimestre'),(3,'3º Bimestre'),(4,'4º Bimestre');
-/*!40000 ALTER TABLE `bimestre` ENABLE KEYS */;
+LOCK TABLES `candidato` WRITE;
+/*!40000 ALTER TABLE `candidato` DISABLE KEYS */;
+INSERT INTO `candidato` VALUES (2,'Enzo Benício Pereira',1,1,2,NULL,NULL);
+/*!40000 ALTER TABLE `candidato` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -55,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-18 13:09:52
+-- Dump completed on 2021-05-24 11:27:40
