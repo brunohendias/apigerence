@@ -12,18 +12,14 @@ using System.Threading.Tasks;
 
 namespace apigerence.Controllers
 {
-    [ApiController]
-    [Route("api/v1/[controller]")]
+    [ApiController, Route("api/v1/[controller]")]
     public class BimestreController : ResponseService
     {
-        private readonly IConfiguration _config;
-        private readonly string connectionString;
-        private readonly string queueName = "bimestre";
+        private readonly Queue queue;
 
-        public BimestreController(MySqlContext context, IConfiguration config) : base(context) 
+        public BimestreController(MySqlContext context, IConfiguration config) : base(context)
         {
-            _config = config;
-            connectionString = _config.GetValue<string>("AzureServiceBus");
+            queue = new Queue(config, "bimestre");
         }
 
         [HttpGet]
@@ -48,25 +44,25 @@ namespace apigerence.Controllers
             }
         }
 
-        private void SendMessageQueue(Bimestre request)
+        private async Task SendMessageQueue(Bimestre request)
         {
-            QueueClient client = new(connectionString, queueName, ReceiveMode.PeekLock);
+            var client = new QueueClient(queue._connection, queue._queueName, ReceiveMode.PeekLock);
             string messageBody = JsonSerializer.Serialize(request);
-            Message message = new(Encoding.UTF8.GetBytes(messageBody));
+            var message = new Message(Encoding.UTF8.GetBytes(messageBody));
 
-            client.SendAsync(message);
-            client.CloseAsync();
+            await client.SendAsync(message);
+            await client.CloseAsync();
         }
 
         [HttpPost]
-        public object Post(Bimestre request)
+        public async Task<object> Post(Bimestre request)
         {
             try
             {
                 msg.success = "Cadastramos esse bimestre com sucesso.";
                 msg.fail = "Não conseguimos cadastrar esse bimestre.";
 
-                SendMessageQueue(request);
+                await SendMessageQueue(request);
 
                 Dados = request;
 

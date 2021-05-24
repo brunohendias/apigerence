@@ -10,14 +10,11 @@ namespace apigerence.Models
         public long cod_aluno_disc { get; set; }
         [Required]
         public float nota { get; set; }
-        [Required]
-        [ForeignKey("Aluno")]
+        [Required, ForeignKey("Aluno")]
         public long cod_aluno { get; set; }
-        [Required]
-        [ForeignKey("SerieDisciplina")]
+        [Required, ForeignKey("SerieDisciplina")]
         public long cod_serie_disc { get; set; }
-        [Required]
-        [ForeignKey("Bimestre")]
+        [Required, ForeignKey("Bimestre")]
         public long cod_bimestre { get; set; }
 
         public Aluno Aluno { get; set; }

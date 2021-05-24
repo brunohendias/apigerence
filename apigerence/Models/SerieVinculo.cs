@@ -12,14 +12,11 @@ namespace apigerence.Models
         public int qtd_alunos { get; set; }
         [Required]
         public int limite_alunos { get; set; }
-        [Required]
-        [ForeignKey("Serie")]
+        [Required, ForeignKey("Serie")]
         public long cod_serie { get; set; }
-        [Required]
-        [ForeignKey("Turno")]
+        [Required, ForeignKey("Turno")]
         public long cod_turno { get; set; }
-        [Required]
-        [ForeignKey("Turma")]
+        [Required, ForeignKey("Turma")]
         public long cod_turma { get; set; }
         [ForeignKey("Professor")]
         public long cod_prof { get; set; }

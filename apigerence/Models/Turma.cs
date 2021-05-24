@@ -8,8 +8,7 @@ namespace apigerence.Models
     {
         [Key]
         public long cod_turma { get; set; }
-        [Required]
-        [MaxLength(25)]
+        [Required, MaxLength(25)]
         public string turma { get; set; }
     }
 }

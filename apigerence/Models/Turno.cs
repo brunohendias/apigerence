@@ -8,8 +8,7 @@ namespace apigerence.Models
     {
         [Key]
         public long cod_turno { get; set; }
-        [Required]
-        [MaxLength(5)]
+        [Required, MaxLength(5)]
         public string turno { get; set; }
     }
 }

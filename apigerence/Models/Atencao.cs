@@ -8,11 +8,9 @@ namespace apigerence.Models
     [Table("atencao")]
     public class Atencao
     {
-        [Key]
-        [ForeignKey("Inscricao")]
+        [Key, ForeignKey("Inscricao")]
         public long cod_atencao { get; set; }
-        [Required]
-        [MaxLength(50)]
+        [Required, MaxLength(50)]
         public string atencao { get; set; }
 
         [JsonIgnore]

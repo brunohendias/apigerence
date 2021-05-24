@@ -9,17 +9,13 @@ namespace apigerence.Models
 
         [Key]
         public long cod_can { get; set; }
-        [Required]
-        [MaxLength(50)]
+        [Required, MaxLength(50)]
         public string nome { get; set; }
-        [Required]
-        [ForeignKey("SerieVinculo")]
+        [Required, ForeignKey("SerieVinculo")]
         public long cod_serie_v { get; set; }
-        [Required]
-        [ForeignKey("Atencao")]
+        [Required, ForeignKey("Atencao")]
         public long cod_atencao { get; set; }
-        [Required]
-        [ForeignKey("Inscricao")]
+        [Required, ForeignKey("Inscricao")]
         public long cod_insc { get; set; }
 
         public SerieVinculo SerieVinculo { get; set; }
