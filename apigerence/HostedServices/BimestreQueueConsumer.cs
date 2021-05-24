@@ -1,8 +1,8 @@
 ﻿using apigerence.Models;
-using apigerence.Models.Context;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using MySqlConnector;
 using System;
 using System.Text.Json;
 using System.Threading;
@@ -49,6 +49,21 @@ namespace apigerence.HostedServices
             Bimestre request = JsonSerializer.Deserialize<Bimestre>(message.Body);
 
             // Dar sequencia com os dados recebidos da fila na variavel request
+            using (var conn = new MySqlConnection(_queue._builder))
+            {
+                Console.WriteLine("Opening connection");
+                await conn.OpenAsync();
+
+                using (var command = conn.CreateCommand())
+                {
+                    //@"INSERT INTO inventory (name, quantity) VALUES (@name1, @quantity1),(@name2, @quantity2), (@name3, @quantity3);";
+                    command.CommandText = @"INSERT INTO bimestre (bimestre) VALUES (@name);";
+                    command.Parameters.AddWithValue("@name", request.bimestre);
+
+                    Console.WriteLine("Executando o sql... ");
+                    await command.ExecuteNonQueryAsync();
+                }
+            }
 
             await _queue._queueClient.CompleteAsync(message.SystemProperties.LockToken);
         }

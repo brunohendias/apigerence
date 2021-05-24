@@ -9,6 +9,7 @@ namespace apigerence.Models
         private readonly static string _key = "AzureServiceBus";
         public readonly string _connection;
         public readonly string _queueName;
+        public readonly string _builder;
         public IQueueClient _queueClient;
 
         public Queue(IConfiguration config, string queueName)
@@ -17,6 +18,8 @@ namespace apigerence.Models
             _connection = _config.GetValue<string>(_key);
             _queueName = queueName;
             _queueClient = new QueueClient(_connection, _queueName);
+
+            _builder = _config.GetValue<string>("Connections:MySql");
         }
     }
 }
