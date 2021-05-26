@@ -1,131 +1,56 @@
 ﻿using apigerence.Models;
-using apigerence.Models.Context;
-using apigerence.Services;
+using apigerence.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Linq;
 
 namespace apigerence.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class SerieController : ResponseService
+    public class SerieController
     {
-        public SerieController(MySqlContext context) : base(context) { }
+        private readonly ISerie _interface;
+
+        public SerieController(ISerie contract) => _interface = contract;
 
         [HttpGet]
         public object Get()
         {
-            try
-            {
-                msg.success = "Buscamos as séries com successo.";
-                msg.fail = "Não encontramos as séries.";
+            try { return _interface.Get(); }
 
-                var query = ( from serie in _context.Series select serie ).ToList();
+            catch (Exception e) { return e; }
+        }
 
-                Dados = query.Count == 0 ? null : query;
+        [HttpGet("{id}")]
+        public object Find(long id)
+        {
+            try { return _interface.Find(id); }
 
-                return MontaRetorno();
-            }
-            catch(Exception e)
-            {
-                return RespErrorLog(e);
-            }
+            catch (Exception e) { return e; }
         }
 
         [HttpPost]
         public object Post([FromBody] Serie request)
         {
-            try
-            {
-                msg.success = "Cadastramos essa série com successo.";
-                msg.fail = "Não conseguimos cadastrar essa série.";
+            try { return _interface.Post(request); }
 
-                _context.Series.Add(request);
-                _context.SaveChanges();
-
-                Dados = request;
-
-                return MontaRetorno();
-            }
-            catch (Exception e)
-            {
-                return RespErrorLog(e);
-            }
-        }
-
-        [HttpGet("{id}")]
-        public object FindById(long id)
-        {
-            try
-            {
-                msg.success = "Buscamos essa série com successo.";
-                msg.fail = "Não conseguimos encontrar essa série.";
-
-                Serie dado = _context.Series.Find(id);
-                Dados = dado;
-
-                return MontaRetorno();
-            }
-            catch (Exception e)
-            {
-                return RespErrorLog(e);
-            }
+            catch (Exception e) { return e; }
         }
 
         [HttpPut]
         public object Put([FromBody] Serie request)
         {
-            try
-            {
-                msg.success = "Editamos essa série com successo.";
-                msg.fail = "Não conseguimos encontrar essa série.";
+            try { return _interface.Put(request); }
 
-                Serie dado = _context.Series.Find(request.cod_serie);
-                if (dado == null) return RespFail();
-
-                _context.Entry(dado).CurrentValues.SetValues(request);
-                _context.SaveChanges();
-
-                Dados = request;
-
-                return MontaRetorno();
-            }
-            catch (Exception e)
-            {
-                return RespErrorLog(e);
-            }
+            catch (Exception e) { return e; }
         }
 
         [HttpDelete("{id}")]
         public object Delete(long id)
         {
-            try
-            {
-                msg.success = "Removemos essa série com successo.";
-                msg.fail = "Não encontramos essa série.";
+            try { return _interface.Delete(id); }
 
-                Serie dado = _context.Series.Find(id);
-                if (dado == null) return RespFail();
-
-                int vinculo = _context.SerieVinculos.Where(serie => serie.cod_serie == id).Count();
-                if (vinculo > 0)
-                {
-                    msg.fail = "Não podemos remover uma série que esta sendo utilizada.";
-                    return RespFail();
-                }
-
-                _context.Series.Remove(dado);
-                _context.SaveChanges();
-
-                Dados = dado;
-
-                return MontaRetorno();
-            }
-            catch (Exception e)
-            {
-                return RespErrorLog(e);
-            }
+            catch (Exception e) { return e; }
         }
     }
 }

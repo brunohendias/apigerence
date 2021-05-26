@@ -8,6 +8,7 @@ using System;
 using apigerence.Models.Context;
 using Microsoft.EntityFrameworkCore;
 using apigerence.HostedServices;
+using apigerence.Repository;
 
 namespace apigerence
 {
@@ -28,6 +29,11 @@ namespace apigerence
 
             var serverVersion = new MySqlServerVersion(new Version(8, 0, 21));
             services.AddDbContext<MySqlContext>(options => options.UseMySql(Configuration["Connections:MySql"], serverVersion));
+
+            services.AddScoped<IAtencao, AtencaoRepository>();
+            services.AddScoped<ISerie, SerieRepository>();
+            services.AddScoped<ITurno, TurnoRepository>();
+            services.AddScoped<ITurma, TurmaRepository>();
 
             services.AddHostedService<BimestreQueueConsumer>();
         }
