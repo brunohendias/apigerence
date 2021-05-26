@@ -22,7 +22,7 @@ namespace apigerence.Controllers
         }
 
         [HttpGet("{id}")]
-        public object Get(long id)
+        public object Find(long id)
         {
             try { return _interface.Find(id); }
 

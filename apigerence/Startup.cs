@@ -31,6 +31,7 @@ namespace apigerence
             services.AddDbContext<MySqlContext>(options => options.UseMySql(Configuration["Connections:MySql"], serverVersion));
 
             services.AddScoped<IAtencao, AtencaoRepository>();
+            services.AddScoped<ISerie, SerieRepository>();
 
             services.AddHostedService<BimestreQueueConsumer>();
         }
