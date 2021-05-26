@@ -1,110 +1,48 @@
 ﻿using apigerence.Models;
-using apigerence.Models.Context;
-using apigerence.Services;
+using apigerence.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace apigerence.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class AtencaoController : ResponseService
+    public class AtencaoController 
     {
-        public AtencaoController(MySqlContext context) : base(context) { }
+        private readonly IAtencao _interface;
+
+        public AtencaoController(IAtencao contract) => _interface = contract;
 
         [HttpGet]
         public object Get()
         {
-            try
-            {
-                msg.success = "Buscamos as atenções com sucesso.";
-                msg.fail = "Não encontramos as atenções.";
-
-                List<Atencao> query = (from atencao in _context.Atencoes select atencao).ToList();
-
-                if (query.Count > 0) Dados = query;
-
-                return MontaRetorno();
-            }
-            catch (Exception e)
-            {
-                return RespErrorLog(e);
-            }
+            try { return _interface.Get(); }
+            
+            catch (Exception e) { return e; }
         }
 
-        [HttpGet("inscricoes")]
-        public object InscricoesPorAtencao()
+        [HttpGet("{id}")]
+        public object Get(long id)
         {
-            try
-            {
-                msg.success = "Buscamos as inscrições com essas atenções com sucesso.";
-                msg.fail = "Não encontramos as inscrições com essas atenções.";
+            try { return _interface.Find(id); }
 
-                long[] atencoes = new long[] { 1, 3, 5 };
-
-                var query = (from atencao in _context.Atencoes
-                             where atencoes.Contains(atencao.cod_atencao)
-                             select new
-                             {
-                                 atencao,
-                                 atencao.Inscricoes
-                             }).ToList();
-
-                if (query.Count > 0) Dados = query;
-
-                return MontaRetorno();
-            }
-            catch (Exception e)
-            {
-                return RespErrorLog(e);
-            }
+            catch (Exception e) { return e; }
         }
 
         [HttpPost]
         public object Post([FromBody] Atencao request)
         {
-            try
-            {
-                msg.success = "Cadastramos essa turma com sucesso.";
-                msg.fail = "Não conseguimos cadastrar essa turma.";
+            try { return _interface.Post(request); }
 
-                _context.Atencoes.Add(request);
-                _context.SaveChanges();
-
-                Dados = request;
-
-                return MontaRetorno();
-            }
-            catch (Exception e)
-            {
-                return RespErrorLog(e);
-            }
+            catch (Exception e) { return e; }
         }
 
         [HttpDelete("{id}")]
         public object Delete(long id)
         {
-            try
-            {
-                msg.success = "Removemos essa turma com sucesso.";
-                msg.fail = "Não encontramos essa turma.";
+            try { return _interface.Delete(id); }
 
-                Atencao request = _context.Atencoes.Find(id);
-                if (request == null) return RespFail();
-
-                _context.Atencoes.Remove(request);
-                _context.SaveChanges();
-
-                Dados = request;
-
-                return MontaRetorno();
-            }
-            catch (Exception e)
-            {
-                return RespErrorLog(e);
-            }
+            catch (Exception e) { return e; }
         }
     }
 }
