@@ -32,6 +32,8 @@ namespace apigerence
 
             services.AddScoped<IAtencao, AtencaoRepository>();
             services.AddScoped<ISerie, SerieRepository>();
+            services.AddScoped<ITurno, TurnoRepository>();
+            services.AddScoped<ITurma, TurmaRepository>();
 
             services.AddHostedService<BimestreQueueConsumer>();
         }

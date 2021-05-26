@@ -15,7 +15,7 @@ namespace testgerence
         private readonly static Serie _register = new()
         {
             cod_serie = 1,
-            serie = "Atenção teste"
+            serie = "Série teste"
         };
 
         public SerieTest() => _mock = Substitute.For<ISerie>();
