@@ -1,89 +1,56 @@
 ﻿using apigerence.Models;
-using apigerence.Models.Context;
-using apigerence.Services;
+using apigerence.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace apigerence.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class ProfessorController : ResponseService
+    public class ProfessorController
     {
-        public ProfessorController(MySqlContext context) : base(context) { }
+        private readonly IProfessor _interface;
+
+        public ProfessorController(IProfessor contract) => _interface = contract;
 
         [HttpGet]
         public object Get()
         {
-            try
-            {
-                msg.success = "Buscamos os professores com sucesso.";
-                msg.fail = "Não encontramos os professores.";
+            try { return _interface.Get(); }
 
-                List<Professor> query = (from professor in _context.Professores select professor).ToList();
+            catch (Exception e) { return e; }
+        }
 
-                if (query.Count > 0) Dados = query;
+        [HttpGet("{id}")]
+        public object Find(long id)
+        {
+            try { return _interface.Find(id); }
 
-                return MontaRetorno();
-            }
-            catch (Exception e)
-            {
-                return RespErrorLog(e);
-            }
+            catch (Exception e) { return e; }
         }
 
         [HttpPost]
         public object Post([FromBody] Professor request)
         {
-            try
-            {
-                msg.success = "Cadastramos esse professor com sucesso.";
-                msg.fail = "Não conseguimos cadastrar esse professor.";
+            try { return _interface.Post(request); }
 
-                _context.Professores.Add(request);
-                _context.SaveChanges();
+            catch (Exception e) { return e; }
+        }
 
-                Dados = request;
+        [HttpPut]
+        public object Put([FromBody] Professor request)
+        {
+            try { return _interface.Put(request); }
 
-                return MontaRetorno();
-            }
-            catch (Exception e)
-            {
-                return RespErrorLog(e);
-            }
+            catch (Exception e) { return e; }
         }
 
         [HttpDelete("{id}")]
         public object Delete(long id)
         {
-            try
-            {
-                msg.success = "Removemos esse professor com sucesso.";
-                msg.fail = "Não encontramos esse professor.";
+            try { return _interface.Delete(id); }
 
-                Professor request = _context.Professores.Find(id);
-                if (request == null) return RespFail();
-
-                int vinculo = _context.SerieVinculos.Where(vserie => vserie.cod_prof == id).Count();
-                if (vinculo > 0)
-                {
-                    msg.fail = "Não podemos remover um professor que esta sendo utilizada.";
-                    return RespFail();
-                }
-
-                _context.Professores.Remove(request);
-                _context.SaveChanges();
-
-                Dados = request;
-
-                return MontaRetorno();
-            }
-            catch (Exception e)
-            {
-                return RespErrorLog(e);
-            }
+            catch (Exception e) { return e; }
         }
     }
 }
