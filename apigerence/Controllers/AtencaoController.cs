@@ -37,6 +37,14 @@ namespace apigerence.Controllers
             catch (Exception e) { return e; }
         }
 
+        [HttpPut]
+        public object Put([FromBody] Atencao request)
+        {
+            try { return _interface.Put(request); }
+
+            catch (Exception e) { return e; }
+        }
+
         [HttpDelete("{id}")]
         public object Delete(long id)
         {

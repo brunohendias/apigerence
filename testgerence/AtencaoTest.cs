@@ -14,6 +14,7 @@ namespace testgerence
 
         private readonly static Atencao _register = new()
         {
+            cod_atencao = 1,
             atencao = "Atenção teste"
         };
 
@@ -32,7 +33,11 @@ namespace testgerence
             .Returns(new Atencao());
 
         [Fact]
+        public void Check_if_success_edit_atencao() => _mock.Put(_register)
+            .Returns(new Atencao());
+
+        [Fact]
         public void Check_if_success_delete_atencao() => _mock.Delete(id)
-            .Returns((Atencao)null);
+            .Returns(new Atencao());
     }
 }

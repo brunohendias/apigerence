@@ -22,6 +22,17 @@ namespace apigerence.Repository
             return request;
         }
 
+        public Atencao Put(Atencao request)
+        {
+            Atencao dado = _context.Atencoes.Find(request.cod_atencao);
+            if (dado == null) return null;
+
+            _context.Entry(dado).CurrentValues.SetValues(request);
+            _context.SaveChanges();
+
+            return request;
+        }
+
         public Atencao Delete(long id)
         {
             Atencao request = Find(id);
