@@ -20,23 +20,23 @@ namespace testgerence
         public DisciplinaTest() => _mock = Substitute.For<IDisciplina>();
 
         [Fact]
-        public void Check_if_success_get_atencoes() => _mock.Get()
+        public void Check_if_success_get_disciplinas() => _mock.Get()
             .Returns(new List<Disciplina>());
 
         [Fact]
-        public void Check_if_success_find_atencao() => _mock.Find(id)
+        public void Check_if_success_find_disciplina() => _mock.Find(id)
             .Returns(new Disciplina());
 
         [Fact]
-        public void Check_if_success_register_atencao() => _mock.Post(_register)
+        public void Check_if_success_register_disciplina() => _mock.Post(_register)
             .Returns(new Disciplina());
 
         [Fact]
-        public void Check_if_success_edit_serie() => _mock.Put(_register)
+        public void Check_if_success_edit_disciplina() => _mock.Put(_register)
             .Returns(new Disciplina());
 
         [Fact]
-        public void Check_if_success_delete_atencao() => _mock.Delete(id)
+        public void Check_if_success_delete_disciplina() => _mock.Delete(id)
             .Returns(new Disciplina());
     }
 }

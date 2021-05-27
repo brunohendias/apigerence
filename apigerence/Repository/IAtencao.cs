@@ -11,6 +11,8 @@ namespace apigerence.Repository
 
         Atencao Post(Atencao request);
 
+        Atencao Put(Atencao request);
+
         Atencao Delete(long id);
     }
 }

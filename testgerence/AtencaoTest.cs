@@ -32,6 +32,10 @@ namespace testgerence
             .Returns(new Atencao());
 
         [Fact]
+        public void Check_if_success_edit_atencao() => _mock.Put(_register)
+            .Returns(new Atencao());
+
+        [Fact]
         public void Check_if_success_delete_atencao() => _mock.Delete(id)
             .Returns((Atencao)null);
     }
