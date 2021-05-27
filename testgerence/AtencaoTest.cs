@@ -38,6 +38,6 @@ namespace testgerence
 
         [Fact]
         public void Check_if_success_delete_atencao() => _mock.Delete(id)
-            .Returns((Atencao)null);
+            .Returns(new Atencao());
     }
 }
