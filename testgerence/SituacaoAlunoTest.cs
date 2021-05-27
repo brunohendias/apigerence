@@ -21,23 +21,23 @@ namespace testgerence
         public SituacaoAlunoTest() => _mock = Substitute.For<ISituacaoAluno>();
 
         [Fact]
-        public void Check_if_success_get_series() => _mock.Get()
+        public void Check_if_success_get_situacoes_aluno() => _mock.Get()
             .Returns(new List<SituacaoAluno>());
 
         [Fact]
-        public void Check_if_success_find_serie() => _mock.Find(id)
+        public void Check_if_success_find_situacao_aluno() => _mock.Find(id)
             .Returns(new SituacaoAluno());
 
         [Fact]
-        public void Check_if_success_register_serie() => _mock.Post(_register)
+        public void Check_if_success_register_situacao_aluno() => _mock.Post(_register)
             .Returns(new SituacaoAluno());
 
         [Fact]
-        public void Check_if_success_edit_serie() => _mock.Put(_register)
+        public void Check_if_success_edit_situacao_aluno() => _mock.Put(_register)
             .Returns(new SituacaoAluno());
 
         [Fact]
-        public void Check_if_success_delete_serie() => _mock.Delete(id)
+        public void Check_if_success_delete_situacao_aluno() => _mock.Delete(id)
             .Returns(new SituacaoAluno());
     }
 }
