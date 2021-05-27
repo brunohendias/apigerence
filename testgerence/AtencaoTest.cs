@@ -14,6 +14,7 @@ namespace testgerence
 
         private readonly static Atencao _register = new()
         {
+            cod_atencao = 1,
             atencao = "Atenção teste"
         };
 

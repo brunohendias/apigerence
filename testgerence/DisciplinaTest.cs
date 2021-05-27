@@ -14,6 +14,7 @@ namespace testgerence
 
         private readonly static Disciplina _register = new()
         {
+            cod_disciplina = 1,
             disciplina = "Disciplina teste"
         };
 

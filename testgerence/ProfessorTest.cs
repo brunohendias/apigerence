@@ -14,7 +14,8 @@ namespace testgerence
 
         private readonly static Professor _register = new()
         {
-            nom_prof = "Disciplina teste"
+            cod_prof = 1,
+            nom_prof = "Professor teste"
         };
 
         public ProfessorTest() => _mock = Substitute.For<IProfessor>();
