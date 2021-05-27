@@ -36,6 +36,7 @@ namespace apigerence
             services.AddScoped<ITurma, TurmaRepository>();
             services.AddScoped<IProfessor, ProfessorRepository>();
             services.AddScoped<IDisciplina, DisciplinaRepository>();
+            services.AddScoped<ISituacaoAluno, SituacaoAlunoRepository>();
 
             services.AddHostedService<BimestreQueueConsumer>();
         }
