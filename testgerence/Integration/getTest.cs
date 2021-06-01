@@ -2,69 +2,51 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace testgerence.Integration
 {
-    public class getTest : IClassFixture<WebApplicationFactory<apigerence.Startup>>
+    public class GetTest : IClassFixture<WebApplicationFactory<apigerence.Startup>>
     {
-        private readonly WebApplicationFactory<apigerence.Startup> _factory;
+        private readonly HttpClient client;
 
-        public getTest(WebApplicationFactory<apigerence.Startup> factory)
+        public GetTest(WebApplicationFactory<apigerence.Startup> factory) => 
+            client = factory.CreateClient();
+
+        [   
+            Theory, InlineData("Turno"), 
+            InlineData("Turma"), InlineData("Serie"),
+            InlineData("Disciplina"), InlineData("Professor"),
+            InlineData("SituacaoAluno"), InlineData("Atencao"),
+            InlineData("Inscricao"), InlineData("Candidato"), 
+            InlineData("Aluno"), InlineData("DadosSerie"), 
+            InlineData("AlunoDisciplina"), InlineData("SerieDisciplina")
+        ]
+        public async Task Check_if_success (string url)
         {
-            _factory = factory;
-        }
+            HttpResponseMessage response = await client.GetAsync("/api/v1/" + url);
 
-        [Theory]
-        [InlineData("Atencao")]
-        [InlineData("Serie")]
-        [InlineData("Turma")]
-        [InlineData("Turno")]
-        public async Task check_if_success_get(string url)
-        {
-            // Arrange
-            var client = _factory.CreateClient();
-
-            // Act
-            var response = await client.GetAsync("/api/v1/" + url);
-
-            // Assert
             // Status Code 200-299
             response.EnsureSuccessStatusCode();
 
+            // Verifica o Header (tipo de retorno)
             Assert.Equal("application/json; charset=utf-8",
                 response.Content.Headers.ContentType.ToString());
             Assert.False(response.Content == null);
 
-            // pega os dados de retorno
+            // Pega os dados de retorno
             string stringResponse = await response.Content.ReadAsStringAsync();
-            Assert.False(stringResponse.Count() == 0);
+            
+            // Verifica se encontrou resultado
+            Assert.False(stringResponse.Length == 0);
 
             if (url == "Atencao")
-            {
-                var json = JsonConvert.DeserializeObject<List<Atencao>>(stringResponse);
+            { // Exemplos
+                List<Atencao> json = JsonConvert.DeserializeObject<List<Atencao>>(stringResponse);
                 Assert.True(json.Count > 0);
                 Assert.True(json[0].cod_atencao == 1);
-            }
-            else if (url == "Serie")
-            {
-                var json = JsonConvert.DeserializeObject<List<Serie>>(stringResponse);
-                Assert.True(json.Count > 0);
-                Assert.True(json[0].cod_serie == 1);
-            }
-            else if (url == "Turma")
-            {
-                var json = JsonConvert.DeserializeObject<List<Turma>>(stringResponse);
-                Assert.True(json.Count > 0);
-                Assert.True(json[0].cod_turma == 1);
-            }
-            else if (url == "Turno")
-            {
-                var json  = JsonConvert.DeserializeObject<List<Turno>>(stringResponse);
-                Assert.True(json.Count > 0);
-                Assert.True(json[0].cod_turno == 1);
             }
         }
     }
