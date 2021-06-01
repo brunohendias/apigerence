@@ -4,7 +4,7 @@ using apigerence.Models;
 using System.Collections.Generic;
 using Xunit;
 
-namespace testgerence
+namespace testgerence.Unitary
 {
     public class AtencaoTest
     {
