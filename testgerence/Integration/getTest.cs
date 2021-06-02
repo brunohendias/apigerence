@@ -30,7 +30,7 @@ namespace testgerence.Integration
             InlineData("AlunoDisciplina", "cod_aluno: 5"),
             InlineData("SerieDisciplina")
         ]
-        public async Task Check_if_success (string url, string request = null)
+        public async Task Success (string url, string request = null)
         {
             HttpResponseMessage response = await client.GetAsync(pathbase + url);
 

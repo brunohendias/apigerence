@@ -25,7 +25,7 @@ namespace testgerence.Integration
             InlineData("SituacaoAluno", "{ 'situacao': 'teste' }"),
             InlineData("Atencao", "{ 'atencao': 'teste' }")
         ]
-        public async Task Check_if_success(string path, string request = null)
+        public async Task Success (string path, string request = null)
         {
             request = request.Replace("'", "\"");
 

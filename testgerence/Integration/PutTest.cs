@@ -22,10 +22,10 @@ namespace testgerence.Integration
             InlineData("Serie", "{ 'cod_serie': 1, 'serie': 'teste' }"),
             InlineData("Disciplina", "{ 'cod_disciplina': 1, 'disciplina': 'teste' }"),
             InlineData("Professor", "{ 'cod_prof': 1, 'nom_prof': 'teste' }"),
-            InlineData("SituacaoAluno", "{ 'cod_situacao': 1, 'situacao': 'teste' }"),
+            InlineData("SituacaoAluno", "{ 'cod_situacao': 2, 'situacao': 'teste' }"),
             InlineData("Atencao", "{ 'cod_atencao': 1, 'atencao': 'teste' }")
         ]
-        public async Task Check_if_success(string path, string request = null)
+        public async Task Success (string path, string request = null)
         {
             request = request.Replace("'", "\"");
 
