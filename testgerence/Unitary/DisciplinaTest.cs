@@ -4,7 +4,7 @@ using NSubstitute;
 using System.Collections.Generic;
 using Xunit;
 
-namespace testgerence
+namespace testgerence.Unitary
 {
     public class DisciplinaTest
     {
