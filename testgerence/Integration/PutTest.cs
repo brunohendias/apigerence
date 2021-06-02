@@ -45,10 +45,7 @@ namespace testgerence.Integration
             Assert.False(result.Length == 0);
 
             if (request != null)
-            {
-                request = request.Replace("{ ", "").Replace(" }", "").Replace(": ", ":").Replace(", ", ",");
-                Assert.Contains(request, result);
-            }
+                Assert.Contains(request.Replace(" ", ""), result);
         }
     }
 }
