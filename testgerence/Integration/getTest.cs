@@ -9,6 +9,8 @@ namespace testgerence.Integration
     {
         private readonly HttpClient client;
 
+        private static readonly string pathbase = "/api/v1/";
+
         public GetTest(WebApplicationFactory<apigerence.Startup> factory) => 
             client = factory.CreateClient();
 
@@ -28,9 +30,9 @@ namespace testgerence.Integration
             InlineData("AlunoDisciplina", "cod_aluno: 5"),
             InlineData("SerieDisciplina")
         ]
-        public async Task Check_if_success (string url, string result = null)
+        public async Task Success (string url, string request = null)
         {
-            HttpResponseMessage response = await client.GetAsync("/api/v1/" + url);
+            HttpResponseMessage response = await client.GetAsync(pathbase + url);
 
             response.EnsureSuccessStatusCode(); // Status Code 200-299
 
@@ -39,21 +41,12 @@ namespace testgerence.Integration
             Assert.Equal("application/json; charset=utf-8",
                 response.Content.Headers.ContentType.ToString());
 
-            string stringResponse = await response.Content.ReadAsStringAsync();
+            string result = await response.Content.ReadAsStringAsync();
 
-            Assert.False(stringResponse.Length == 0);
+            Assert.False(result.Length == 0);
 
-            if (result != null)
-            {
-                Assert.Contains(result, stringResponse.Replace("\"", "").Replace(":", ": "));
-            }
+            if (request != null)
+                Assert.Contains(request.Replace(" ", ""), result.Replace("\"", "").Replace(" ", ""));
         }
     }
 }
-
-/*if (url == "Atencao")// Exemplos
-{
-    List<Atencao> json = JsonConvert.DeserializeObject<List<Atencao>>(stringResponse);
-    Assert.True(json.Count > 0);
-    Assert.True(json[0].cod_atencao == 1);
-}*/
