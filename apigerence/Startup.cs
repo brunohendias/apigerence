@@ -39,7 +39,7 @@ namespace apigerence
             services.AddScoped<ISituacaoAluno, SituacaoAlunoRepository>();
             services.AddScoped<ICustom, CustomRepository>();
 
-            services.AddHostedService<BimestreQueueConsumer>();
+            services.AddHostedService<BemestreQueueConsumer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

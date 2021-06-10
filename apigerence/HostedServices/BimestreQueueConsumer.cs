@@ -10,14 +10,12 @@ using System.Threading.Tasks;
 
 namespace apigerence.HostedServices
 {
-    public class BimestreQueueConsumer : IHostedService
+    public class BemestreQueueConsumer : IHostedService
     {
         private readonly Queue _queue;
 
-        public BimestreQueueConsumer(IConfiguration config)
-        {
+        public BemestreQueueConsumer(IConfiguration config) =>
             _queue = new Queue(config, "bimestre");
-        }
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
@@ -29,30 +27,22 @@ namespace apigerence.HostedServices
         public async Task StopAsync(CancellationToken cancellationToken)
         {
             Console.WriteLine("  Fila finalizada  ");
-            await _queue._queueClient.CloseAsync();
+            await _queue.Client.CloseAsync();
             await Task.CompletedTask;
         }
 
-        private void ProcessMessageHandler()
-        {
-            var messageHandlerOptions = new MessageHandlerOptions(ExceptionReceivedHandler)
-            {
-                MaxConcurrentCalls = 1,
-                AutoComplete = false
-            };
+        private void ProcessMessageHandler() =>
+            _queue.Client.RegisterMessageHandler(Handler, _queue.HandlerOptions);
 
-            _queue._queueClient.RegisterMessageHandler(ProcessMessagesAsync, messageHandlerOptions);
-        }
-
-        private async Task ProcessMessagesAsync(Message message, CancellationToken token)
+        private async Task Handler(Message message, CancellationToken token)
         {
             Bimestre request = JsonSerializer.Deserialize<Bimestre>(message.Body);
 
             // Dar sequencia com os dados recebidos da fila na variavel request
-            using (var conn = new MySqlConnection(_queue._builder))
+            using (var conn = new MySqlConnection(_queue.DBBuilder))
             {
                 Console.WriteLine("Opening connection");
-                await conn.OpenAsync();
+                await conn.OpenAsync(token);
 
                 using (var command = conn.CreateCommand())
                 {
@@ -65,14 +55,7 @@ namespace apigerence.HostedServices
                 }
             }
 
-            await _queue._queueClient.CompleteAsync(message.SystemProperties.LockToken);
-        }
-
-        private Task ExceptionReceivedHandler(ExceptionReceivedEventArgs exceptionReceivedEventArgs)
-        {
-            var error = exceptionReceivedEventArgs.Exception.Message;
-            Console.WriteLine($" error: {error} ");
-            return Task.CompletedTask;
+            await _queue.Client.CompleteAsync(message.SystemProperties.LockToken);
         }
     }
 }

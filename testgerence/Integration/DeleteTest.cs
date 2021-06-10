@@ -1,19 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace testgerence.Integration
 {
-    public class DeleteTest : IClassFixture<WebApplicationFactory<apigerence.Startup>>
+    public class DeleteTest : BaseClass
     {
-        private readonly HttpClient client;
-
-        private static readonly string pathbase = "/api/v1/";
-
-        public DeleteTest(WebApplicationFactory<apigerence.Startup> factory) =>
-           client = factory.CreateClient();
-
         [
             InlineData("Turno/1"),
             InlineData("Turma/1"),
@@ -25,7 +17,7 @@ namespace testgerence.Integration
         ]
         public async Task Success (string path)
         {
-            HttpResponseMessage response = await client.DeleteAsync(pathbase + path);
+            HttpResponseMessage response = await Client.DeleteAsync(Pathbase + path);
 
             response.EnsureSuccessStatusCode(); // Status Code 200-299
         }

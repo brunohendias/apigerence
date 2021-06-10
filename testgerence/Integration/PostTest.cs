@@ -1,22 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace testgerence.Integration
 {
-    public class PostTest : IClassFixture<WebApplicationFactory<apigerence.Startup>>
+    public class PostTest : BaseClass
     {
-        private readonly HttpClient client;
-
-        private static readonly string pathbase = "/api/v1/";
-
-        public PostTest(WebApplicationFactory<apigerence.Startup> factory) =>
-           client = factory.CreateClient();
-
-        [
-            Theory,
+        [Theory,
             InlineData("Turno", "{ 'turno': 'teste' }"),
             InlineData("Turma", "{ 'turma': 'teste' }"),
             InlineData("Serie", "{ 'serie': 'teste' }"),
@@ -31,13 +22,13 @@ namespace testgerence.Integration
 
             StringContent data = new(request, Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = await client.PostAsync(pathbase + path, data);
+            HttpResponseMessage response = await Client.PostAsync(Pathbase + path, data);
 
             response.EnsureSuccessStatusCode(); // Status Code 200-299
 
             Assert.False(response.Content == null);
 
-            Assert.Equal("application/json; charset=utf-8",
+            Assert.Equal(ContentType,
                 response.Content.Headers.ContentType.ToString());
 
             string result = await response.Content.ReadAsStringAsync();
