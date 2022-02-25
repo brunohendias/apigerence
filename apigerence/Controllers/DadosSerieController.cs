@@ -50,19 +50,11 @@ namespace apigerence.Controllers
 
         private SerieVinculo Find(long id) => _context.SerieVinculos.Find(id);
 
-        private bool DadosInvalido(SerieVinculoRequestPost request)
-        {
-            Serie serie = _context.Series.Find(request.cod_serie);
-            if (serie == null) return true;
-            Turno turno = _context.Turnos.Find(request.cod_turno);
-            if (turno == null) return true;
-            Turma turma = _context.Turmas.Find(request.cod_turma);
-            if (turma == null) return true;
-            Professor professor = _context.Professores.Find(request.cod_prof);
-            if (professor == null) return true;
-
-            return false;
-        }
+        private bool DadosInvalido(SerieVinculoRequestPost request) =>
+            _context.Series.Find(request.cod_serie) == null
+         || _context.Turnos.Find(request.cod_turno) == null
+         || _context.Turmas.Find(request.cod_turma) == null
+         || _context.Professores.Find(request.cod_prof) == null;
 
         [HttpPost]
         public object Post([FromBody] SerieVinculoRequestPost request)

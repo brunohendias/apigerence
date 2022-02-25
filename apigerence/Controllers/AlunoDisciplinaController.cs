@@ -77,16 +77,11 @@ namespace apigerence.Controllers
             }
         }
 
-        private bool DadosInvalido(AlunoDisciplinaRequestPost request)
-        {
-            if (request.nota > 100 || request.nota < 0) return true;
-            Aluno aluno = _context.Alunos.Find(request.cod_aluno);
-            if (aluno == null) return true;
-            SerieDisciplina disciplina = _context.SerieDisciplinas.Find(request.cod_serie_disc);
-            if (disciplina == null) return true;
-            Bimestre bimestre = _context.Bimestres.Find(request.cod_bimestre);
-            return bimestre == null;
-        }
+        private bool DadosInvalido(AlunoDisciplinaRequestPost request) =>
+            request.nota > 100 || request.nota < 0
+         || _context.Alunos.Find(request.cod_aluno) == null
+         || _context.SerieDisciplinas.Find(request.cod_serie_disc) == null
+         || _context.Bimestres.Find(request.cod_bimestre) == null;
 
         [HttpPost]
         public object Post([FromBody] AlunoDisciplinaRequestPost request)

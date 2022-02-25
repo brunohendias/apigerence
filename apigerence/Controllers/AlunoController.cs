@@ -50,7 +50,7 @@ namespace apigerence.Controllers
 
         private SerieVinculo BuscaDadosSerie(long cod_serie_v) => _context.SerieVinculos.Find(cod_serie_v);
 
-        private string GeraRA(Aluno request) => 
+        private static string GeraRA(Aluno request) =>
             "" + request.cod_can + request.cod_atencao + request.cod_situacao + request.cod_serie_v + request.cod_atencao;
 
         [HttpPost]
@@ -73,7 +73,7 @@ namespace apigerence.Controllers
                 }
 
                 SerieVinculo vserie = BuscaDadosSerie(cod_serie_v);
-                if (candidato == null)
+                if (vserie == null)
                 {
                     msg.fail = "Não conseguimos encontrar os dados dessa série.";
                     return RespFail();
